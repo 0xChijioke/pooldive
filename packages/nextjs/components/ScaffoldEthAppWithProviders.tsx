@@ -13,11 +13,15 @@ import { useNativeCurrencyPrice } from "~~/hooks/scaffold-eth";
 import { useGlobalState } from "~~/services/store/store";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 import { appChains } from "~~/services/web3/wagmiConnectors";
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { GraphApolloLink } from '@graphprotocol/client-apollo'
+import * as GraphClient from '../.graphclient'
+
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   const price = useNativeCurrencyPrice();
   const setNativeCurrencyPrice = useGlobalState(state => state.setNativeCurrencyPrice);
-
+  
   useEffect(() => {
     if (price > 0) {
       setNativeCurrencyPrice(price);
@@ -28,7 +32,7 @@ const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
     <>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="relative flex flex-col flex-1">{children}</main>
+          <main className="relative flex flex-col flex-1">{children}</main>
         <Footer />
       </div>
       <Toaster />
@@ -44,6 +48,11 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
   useEffect(() => {
     setMounted(true);
   }, []);
+  
+  const client = new ApolloClient({
+  link: new GraphApolloLink(GraphClient),
+  cache: new InMemoryCache(),
+  });
 
   return (
     <WagmiConfig config={wagmiConfig}>
@@ -53,7 +62,11 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
         avatar={BlockieAvatar}
         theme={mounted ? (isDarkMode ? darkTheme() : lightTheme()) : lightTheme()}
       >
-        <ScaffoldEthApp>{children}</ScaffoldEthApp>
+        <ApolloProvider client={client}>
+          <ScaffoldEthApp>
+            {children}
+          </ScaffoldEthApp>
+        </ApolloProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );

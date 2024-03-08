@@ -2,10 +2,9 @@
 
 
 
-
 ## Problem Statement
 
-In the rapidly evolving DeFi landscape, users often face challenges in understanding and analyzing pools across different protocols. Pooldive addresses this problem by providing a centralized platform for efficient pool exploration and analysis.
+In the DeFi landscape, users often face challenges in understanding and engaging with pools across different protocols. Pooldive aims to address this problem by providing a centralized platform for efficient pool exploration and participation.
 
 
 ## Quickstart
@@ -15,8 +14,8 @@ To get started with Scaffold-ETH 2, follow the steps below:
 1. Clone this repo & install dependencies
 
 ```
-git clone https://github.com/scaffold-eth/scaffold-eth-2.git
-cd scaffold-eth-2
+git clone https://github.com/0xChijioke/pooldive.git
+cd pooldive
 yarn install
 ```
 
@@ -42,22 +41,5 @@ This command deploys a test smart contract to the local network. The contract is
 yarn start
 ```
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
-
-Run smart contract test with `yarn hardhat:test`
-
-- Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
-- Edit your frontend in `packages/nextjs/pages`
-- Edit your deployment scripts in `packages/hardhat/deploy`
 
 ## Documentation
-
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
-
-To know more about its features, check out our [website](https://scaffoldeth.io).
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
