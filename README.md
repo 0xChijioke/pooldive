@@ -1,15 +1,34 @@
-# Pooldive
+# Pooldive 🏊🏾
+
+Welcome to Pooldive, a user-friendly tool for exploring and engaging with liquidity pools in Ethereum. Pooldive simplifies the process of navigating and understanding pools from different protocols such as Uniswap and Balancer.
+
+## Features (🚧Work in progress)
+
+    User-Friendly Interface: An intuitive interface empowers users to explore DeFi pools effortlessly.
+
+    Pool Exploration: Dive into Uniswap v3 and Balancer v2 pools with ease.
+
+    Liquidity Provision: Seamlessly participate in liquidity provision as the process undergoes refinement and optimization for user convenience.
+
+    Arbitrage Opportunities: Identify potential arbitrage opportunities for strategic decision-making.
+
+    Composed Liquidity: Explore the power of composed liquidity as additional protocols integrate with Pooldive, expanding access to decentralized finance opportunities.
 
 
 
-## Problem Statement
 
-In the DeFi landscape, users often face challenges in understanding and engaging with pools across different protocols. Pooldive aims to address this problem by providing a centralized platform for efficient pool exploration and participation.
+## Tech Stack 🛠️
+
+Pooldive is built with the following technologies:
+
+    Scaffold-ETH 2
+    Apollo Client
+    The Graph
 
 
 ## Quickstart
 
-To get started with Scaffold-ETH 2, follow the steps below:
+To get started with PoolDive, follow the steps below:
 
 1. Clone this repo & install dependencies
 
@@ -41,5 +60,15 @@ This command deploys a test smart contract to the local network. The contract is
 yarn start
 ```
 
+## Usage 💡 
 
-## Documentation
+Explore DeFi pools, participate in liquidity provision, and identify arbitrage opportunities using the intuitive user interface of Pooldive.
+
+## Future Plans 🔭
+
+1. Chain Agnosticism
+2. Enhanced Functionalities
+    + Swapping
+    + Flash Swaps
+3. Protocol Expansion
+    To further amplify access to liquidity and uncover additional opportunities, supported protocols will be expanded.

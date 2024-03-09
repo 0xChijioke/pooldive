@@ -85,7 +85,7 @@ export const CurrentConfig: TConfig = {
 
 
 
-// export const ethersProvider = new ethers.providers.JsonRpcProvider( `https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA}`);
+export const ethersProvider = new ethers.providers.JsonRpcProvider( `https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA}`);
 const mainnetProvider = new ethers.providers.JsonRpcProvider(
   CurrentConfig.rpc.mainnet
 )

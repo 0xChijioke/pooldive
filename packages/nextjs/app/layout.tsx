@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import { ScaffoldEthAppWithProviders } from "~~/components/ScaffoldEthAppWithProviders";
 import { ThemeProvider } from "~~/components/ThemeProvider";
 import "~~/styles/globals.css";
+import { Space_Grotesk } from 'next/font/google'
+
 
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
@@ -12,14 +14,14 @@ const imageUrl = `${baseUrl}/thumbnail.jpg`;
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Scaffold-ETH 2 App",
-    template: "%s | Scaffold-ETH 2",
+    default: "PoolDive App",
+    template: "%s | PoolDive",
   },
   description: "Built with 🏗 Scaffold-ETH 2",
   openGraph: {
     title: {
-      default: "Scaffold-ETH 2 App",
-      template: "%s | Scaffold-ETH 2",
+      default: "PoolDive App",
+      template: "%s | PoolDive",
     },
     description: "Built with 🏗 Scaffold-ETH 2",
     images: [
@@ -32,8 +34,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [imageUrl],
     title: {
-      default: "Scaffold-ETH 2",
-      template: "%s | Scaffold-ETH 2",
+      default: "PoolDive",
+      template: "%s | PoolDive",
     },
     description: "Built with 🏗 Scaffold-ETH 2",
   },
@@ -42,9 +44,15 @@ export const metadata: Metadata = {
   },
 };
 
+const inter = Space_Grotesk({
+  subsets: ['latin-ext'],
+  display: 'block',
+  weight: "400"
+})
+
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html suppressHydrationWarning>
+    <html lang="en" className={inter.className} suppressHydrationWarning>
       <body>
         <ThemeProvider enableSystem>
           <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>

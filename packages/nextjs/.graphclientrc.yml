@@ -1,0 +1,28 @@
+sources:
+  - name: balancerv2
+    handler:
+      graphql:
+        endpoint: https://api.thegraph.com/subgraphs/name/balancer-labs/balancer-v2
+    transforms:
+      - prefix:
+          value: bal_
+          includeRootOperations: true
+      - blockTracking:
+          validateSchema: true
+      - autoPagination:
+          validateSchema: true
+  - name: uniswapv2
+    handler:
+      graphql:
+        endpoint: https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3
+    transforms:
+      - prefix:
+          value: uni_
+          includeRootOperations: true
+      - blockTracking:
+          validateSchema: true
+      - autoPagination:
+          validateSchema: true
+        
+documents:
+  - './app/queries/**/*.{ts,tsx,js,jsx}'
