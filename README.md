@@ -1,6 +1,6 @@
-# Pooldive 🏊🏾
+# Pooldive 🏊🏽
 
-Welcome to Pooldive, a user-friendly tool for exploring and engaging with liquidity pools in Ethereum. Pooldive simplifies the process of navigating and understanding pools from different protocols such as Uniswap and Balancer.
+Welcome to Pooldive, a user-friendly tool for exploring and engaging with liquidity pools in Ethereum. Pooldive aims to simplify the process of navigating and understanding pools from different protocols such as Uniswap and Balancer.
 
 ## Features (🚧Work in progress)
 
@@ -13,8 +13,6 @@ Welcome to Pooldive, a user-friendly tool for exploring and engaging with liquid
     Arbitrage Opportunities: Identify potential arbitrage opportunities for strategic decision-making.
 
     Composed Liquidity: Explore the power of composed liquidity as additional protocols integrate with Pooldive, expanding access to decentralized finance opportunities.
-
-
 
 
 ## Tech Stack 🛠️
