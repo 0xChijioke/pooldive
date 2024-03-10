@@ -1,27 +1,33 @@
 # Pooldive 🏊🏽
 
-Welcome to Pooldive, a user-friendly tool for exploring and engaging with liquidity pools in Ethereum. Pooldive aims to simplify the process of navigating and understanding pools from different protocols such as Uniswap and Balancer.
+Welcome to Pooldive, a tool for exploring and engaging with liquidity pools in Ethereum. Pooldive aims to simplify the process of navigating and understanding pools from different protocols such as Uniswap and Balancer.
 
-## Features (🚧Work in progress)
 
-    User-Friendly Interface: An intuitive interface empowers users to explore DeFi pools effortlessly.
 
-    Pool Exploration: Dive into Uniswap v3 and Balancer v2 pools with ease.
+## Features (🚧 Work in progress)
 
-    Liquidity Provision: Seamlessly participate in liquidity provision as the process undergoes refinement and optimization for user convenience.
+- **User-Friendly Interface:** An intuitive interface empowers users to explore DeFi pools effortlessly.
+  
+- **Pool Exploration:** Dive into Uniswap v3 and Balancer v2 pools with ease.
+  
+- **Liquidity Provision:** Seamlessly participate in liquidity provision as the process undergoes refinement and optimization for user convenience.
+  
+- **Arbitrage Opportunities:** Identify potential arbitrage opportunities for strategic decision-making.
+  
+- **Composed Liquidity:** Explore the power of composed liquidity as additional protocols integrate with Pooldive, expanding access to decentralized finance opportunities.
 
-    Arbitrage Opportunities: Identify potential arbitrage opportunities for strategic decision-making.
-
-    Composed Liquidity: Explore the power of composed liquidity as additional protocols integrate with Pooldive, expanding access to decentralized finance opportunities.
 
 
 ## Tech Stack 🛠️
 
 Pooldive is built with the following technologies:
 
-    Scaffold-ETH 2
-    Apollo Client
-    The Graph
+- [Scaffold-ETH 2](https://github.com/scaffold-eth/scaffold-eth-2) - Open source forkable Ethereum dev stack.
+- [Apollo Client](https://www.apollographql.com/docs/react/) - State management and GraphQL client.
+- [The Graph](https://thegraph.com/) - Query protocol for decentralized data.
+- [Uniswap SDK](https://github.com/Uniswap/v3-sdk) - SDK for interacting with the Uniswap protocol.
+- [Balancer SDK](https://github.com/balancer/balancer-sdk) - SDK for interacting with the Balancer protocol.
+
 
 
 ## Quickstart

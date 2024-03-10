@@ -1,0 +1,5450 @@
+schema {
+  query: Query
+  subscription: Subscription
+}
+
+"Marks the GraphQL type as indexable entity.  Each type that should be an entity is required to be annotated with this directive."
+directive @entity on OBJECT
+
+"Defined a Subgraph ID for an object type"
+directive @subgraphId(id: String!) on OBJECT
+
+"creates a virtual field on the entity that may be queried but cannot be set manually through the mappings API."
+directive @derivedFrom(field: String!) on FIELD_DEFINITION
+
+enum uni_Aggregation_interval {
+  hour
+  day
+}
+
+scalar uni_BigDecimal
+
+scalar BigInt
+
+input uni_BlockChangedFilter {
+  number_gte: Int!
+}
+
+input uni_Block_height {
+  hash: uni_Bytes
+  number: Int
+  number_gte: Int
+}
+
+type uni_Bundle {
+  id: ID!
+  ethPriceUSD: uni_BigDecimal!
+}
+
+input uni_Bundle_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  ethPriceUSD: uni_BigDecimal
+  ethPriceUSD_not: uni_BigDecimal
+  ethPriceUSD_gt: uni_BigDecimal
+  ethPriceUSD_lt: uni_BigDecimal
+  ethPriceUSD_gte: uni_BigDecimal
+  ethPriceUSD_lte: uni_BigDecimal
+  ethPriceUSD_in: [uni_BigDecimal!]
+  ethPriceUSD_not_in: [uni_BigDecimal!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Bundle_filter]
+  or: [uni_Bundle_filter]
+}
+
+enum uni_Bundle_orderBy {
+  id
+  ethPriceUSD
+}
+
+type uni_Burn {
+  id: ID!
+  transaction: uni_Transaction!
+  pool: uni_Pool!
+  token0: uni_Token!
+  token1: uni_Token!
+  timestamp: BigInt!
+  owner: uni_Bytes
+  origin: uni_Bytes!
+  amount: BigInt!
+  amount0: uni_BigDecimal!
+  amount1: uni_BigDecimal!
+  amountUSD: uni_BigDecimal
+  tickLower: BigInt!
+  tickUpper: BigInt!
+  logIndex: BigInt
+}
+
+input uni_Burn_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  transaction: String
+  transaction_not: String
+  transaction_gt: String
+  transaction_lt: String
+  transaction_gte: String
+  transaction_lte: String
+  transaction_in: [String!]
+  transaction_not_in: [String!]
+  transaction_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains: String
+  transaction_not_contains_nocase: String
+  transaction_starts_with: String
+  transaction_starts_with_nocase: String
+  transaction_not_starts_with: String
+  transaction_not_starts_with_nocase: String
+  transaction_ends_with: String
+  transaction_ends_with_nocase: String
+  transaction_not_ends_with: String
+  transaction_not_ends_with_nocase: String
+  transaction_: uni_Transaction_filter
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  token0: String
+  token0_not: String
+  token0_gt: String
+  token0_lt: String
+  token0_gte: String
+  token0_lte: String
+  token0_in: [String!]
+  token0_not_in: [String!]
+  token0_contains: String
+  token0_contains_nocase: String
+  token0_not_contains: String
+  token0_not_contains_nocase: String
+  token0_starts_with: String
+  token0_starts_with_nocase: String
+  token0_not_starts_with: String
+  token0_not_starts_with_nocase: String
+  token0_ends_with: String
+  token0_ends_with_nocase: String
+  token0_not_ends_with: String
+  token0_not_ends_with_nocase: String
+  token0_: uni_Token_filter
+  token1: String
+  token1_not: String
+  token1_gt: String
+  token1_lt: String
+  token1_gte: String
+  token1_lte: String
+  token1_in: [String!]
+  token1_not_in: [String!]
+  token1_contains: String
+  token1_contains_nocase: String
+  token1_not_contains: String
+  token1_not_contains_nocase: String
+  token1_starts_with: String
+  token1_starts_with_nocase: String
+  token1_not_starts_with: String
+  token1_not_starts_with_nocase: String
+  token1_ends_with: String
+  token1_ends_with_nocase: String
+  token1_not_ends_with: String
+  token1_not_ends_with_nocase: String
+  token1_: uni_Token_filter
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  owner: uni_Bytes
+  owner_not: uni_Bytes
+  owner_gt: uni_Bytes
+  owner_lt: uni_Bytes
+  owner_gte: uni_Bytes
+  owner_lte: uni_Bytes
+  owner_in: [uni_Bytes!]
+  owner_not_in: [uni_Bytes!]
+  owner_contains: uni_Bytes
+  owner_not_contains: uni_Bytes
+  origin: uni_Bytes
+  origin_not: uni_Bytes
+  origin_gt: uni_Bytes
+  origin_lt: uni_Bytes
+  origin_gte: uni_Bytes
+  origin_lte: uni_Bytes
+  origin_in: [uni_Bytes!]
+  origin_not_in: [uni_Bytes!]
+  origin_contains: uni_Bytes
+  origin_not_contains: uni_Bytes
+  amount: BigInt
+  amount_not: BigInt
+  amount_gt: BigInt
+  amount_lt: BigInt
+  amount_gte: BigInt
+  amount_lte: BigInt
+  amount_in: [BigInt!]
+  amount_not_in: [BigInt!]
+  amount0: uni_BigDecimal
+  amount0_not: uni_BigDecimal
+  amount0_gt: uni_BigDecimal
+  amount0_lt: uni_BigDecimal
+  amount0_gte: uni_BigDecimal
+  amount0_lte: uni_BigDecimal
+  amount0_in: [uni_BigDecimal!]
+  amount0_not_in: [uni_BigDecimal!]
+  amount1: uni_BigDecimal
+  amount1_not: uni_BigDecimal
+  amount1_gt: uni_BigDecimal
+  amount1_lt: uni_BigDecimal
+  amount1_gte: uni_BigDecimal
+  amount1_lte: uni_BigDecimal
+  amount1_in: [uni_BigDecimal!]
+  amount1_not_in: [uni_BigDecimal!]
+  amountUSD: uni_BigDecimal
+  amountUSD_not: uni_BigDecimal
+  amountUSD_gt: uni_BigDecimal
+  amountUSD_lt: uni_BigDecimal
+  amountUSD_gte: uni_BigDecimal
+  amountUSD_lte: uni_BigDecimal
+  amountUSD_in: [uni_BigDecimal!]
+  amountUSD_not_in: [uni_BigDecimal!]
+  tickLower: BigInt
+  tickLower_not: BigInt
+  tickLower_gt: BigInt
+  tickLower_lt: BigInt
+  tickLower_gte: BigInt
+  tickLower_lte: BigInt
+  tickLower_in: [BigInt!]
+  tickLower_not_in: [BigInt!]
+  tickUpper: BigInt
+  tickUpper_not: BigInt
+  tickUpper_gt: BigInt
+  tickUpper_lt: BigInt
+  tickUpper_gte: BigInt
+  tickUpper_lte: BigInt
+  tickUpper_in: [BigInt!]
+  tickUpper_not_in: [BigInt!]
+  logIndex: BigInt
+  logIndex_not: BigInt
+  logIndex_gt: BigInt
+  logIndex_lt: BigInt
+  logIndex_gte: BigInt
+  logIndex_lte: BigInt
+  logIndex_in: [BigInt!]
+  logIndex_not_in: [BigInt!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Burn_filter]
+  or: [uni_Burn_filter]
+}
+
+enum uni_Burn_orderBy {
+  id
+  transaction
+  transaction__id
+  transaction__blockNumber
+  transaction__timestamp
+  transaction__gasUsed
+  transaction__gasPrice
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  token0
+  token0__id
+  token0__symbol
+  token0__name
+  token0__decimals
+  token0__totalSupply
+  token0__volume
+  token0__volumeUSD
+  token0__untrackedVolumeUSD
+  token0__feesUSD
+  token0__txCount
+  token0__poolCount
+  token0__totalValueLocked
+  token0__totalValueLockedUSD
+  token0__totalValueLockedUSDUntracked
+  token0__derivedETH
+  token1
+  token1__id
+  token1__symbol
+  token1__name
+  token1__decimals
+  token1__totalSupply
+  token1__volume
+  token1__volumeUSD
+  token1__untrackedVolumeUSD
+  token1__feesUSD
+  token1__txCount
+  token1__poolCount
+  token1__totalValueLocked
+  token1__totalValueLockedUSD
+  token1__totalValueLockedUSDUntracked
+  token1__derivedETH
+  timestamp
+  owner
+  origin
+  amount
+  amount0
+  amount1
+  amountUSD
+  tickLower
+  tickUpper
+  logIndex
+}
+
+scalar uni_Bytes
+
+type uni_Collect {
+  id: ID!
+  transaction: uni_Transaction!
+  timestamp: BigInt!
+  pool: uni_Pool!
+  owner: uni_Bytes
+  amount0: uni_BigDecimal!
+  amount1: uni_BigDecimal!
+  amountUSD: uni_BigDecimal
+  tickLower: BigInt!
+  tickUpper: BigInt!
+  logIndex: BigInt
+}
+
+input uni_Collect_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  transaction: String
+  transaction_not: String
+  transaction_gt: String
+  transaction_lt: String
+  transaction_gte: String
+  transaction_lte: String
+  transaction_in: [String!]
+  transaction_not_in: [String!]
+  transaction_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains: String
+  transaction_not_contains_nocase: String
+  transaction_starts_with: String
+  transaction_starts_with_nocase: String
+  transaction_not_starts_with: String
+  transaction_not_starts_with_nocase: String
+  transaction_ends_with: String
+  transaction_ends_with_nocase: String
+  transaction_not_ends_with: String
+  transaction_not_ends_with_nocase: String
+  transaction_: uni_Transaction_filter
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  owner: uni_Bytes
+  owner_not: uni_Bytes
+  owner_gt: uni_Bytes
+  owner_lt: uni_Bytes
+  owner_gte: uni_Bytes
+  owner_lte: uni_Bytes
+  owner_in: [uni_Bytes!]
+  owner_not_in: [uni_Bytes!]
+  owner_contains: uni_Bytes
+  owner_not_contains: uni_Bytes
+  amount0: uni_BigDecimal
+  amount0_not: uni_BigDecimal
+  amount0_gt: uni_BigDecimal
+  amount0_lt: uni_BigDecimal
+  amount0_gte: uni_BigDecimal
+  amount0_lte: uni_BigDecimal
+  amount0_in: [uni_BigDecimal!]
+  amount0_not_in: [uni_BigDecimal!]
+  amount1: uni_BigDecimal
+  amount1_not: uni_BigDecimal
+  amount1_gt: uni_BigDecimal
+  amount1_lt: uni_BigDecimal
+  amount1_gte: uni_BigDecimal
+  amount1_lte: uni_BigDecimal
+  amount1_in: [uni_BigDecimal!]
+  amount1_not_in: [uni_BigDecimal!]
+  amountUSD: uni_BigDecimal
+  amountUSD_not: uni_BigDecimal
+  amountUSD_gt: uni_BigDecimal
+  amountUSD_lt: uni_BigDecimal
+  amountUSD_gte: uni_BigDecimal
+  amountUSD_lte: uni_BigDecimal
+  amountUSD_in: [uni_BigDecimal!]
+  amountUSD_not_in: [uni_BigDecimal!]
+  tickLower: BigInt
+  tickLower_not: BigInt
+  tickLower_gt: BigInt
+  tickLower_lt: BigInt
+  tickLower_gte: BigInt
+  tickLower_lte: BigInt
+  tickLower_in: [BigInt!]
+  tickLower_not_in: [BigInt!]
+  tickUpper: BigInt
+  tickUpper_not: BigInt
+  tickUpper_gt: BigInt
+  tickUpper_lt: BigInt
+  tickUpper_gte: BigInt
+  tickUpper_lte: BigInt
+  tickUpper_in: [BigInt!]
+  tickUpper_not_in: [BigInt!]
+  logIndex: BigInt
+  logIndex_not: BigInt
+  logIndex_gt: BigInt
+  logIndex_lt: BigInt
+  logIndex_gte: BigInt
+  logIndex_lte: BigInt
+  logIndex_in: [BigInt!]
+  logIndex_not_in: [BigInt!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Collect_filter]
+  or: [uni_Collect_filter]
+}
+
+enum uni_Collect_orderBy {
+  id
+  transaction
+  transaction__id
+  transaction__blockNumber
+  transaction__timestamp
+  transaction__gasUsed
+  transaction__gasPrice
+  timestamp
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  owner
+  amount0
+  amount1
+  amountUSD
+  tickLower
+  tickUpper
+  logIndex
+}
+
+type uni_Factory {
+  id: ID!
+  poolCount: BigInt!
+  txCount: BigInt!
+  totalVolumeUSD: uni_BigDecimal!
+  totalVolumeETH: uni_BigDecimal!
+  totalFeesUSD: uni_BigDecimal!
+  totalFeesETH: uni_BigDecimal!
+  untrackedVolumeUSD: uni_BigDecimal!
+  totalValueLockedUSD: uni_BigDecimal!
+  totalValueLockedETH: uni_BigDecimal!
+  totalValueLockedUSDUntracked: uni_BigDecimal!
+  totalValueLockedETHUntracked: uni_BigDecimal!
+  owner: ID!
+}
+
+input uni_Factory_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  poolCount: BigInt
+  poolCount_not: BigInt
+  poolCount_gt: BigInt
+  poolCount_lt: BigInt
+  poolCount_gte: BigInt
+  poolCount_lte: BigInt
+  poolCount_in: [BigInt!]
+  poolCount_not_in: [BigInt!]
+  txCount: BigInt
+  txCount_not: BigInt
+  txCount_gt: BigInt
+  txCount_lt: BigInt
+  txCount_gte: BigInt
+  txCount_lte: BigInt
+  txCount_in: [BigInt!]
+  txCount_not_in: [BigInt!]
+  totalVolumeUSD: uni_BigDecimal
+  totalVolumeUSD_not: uni_BigDecimal
+  totalVolumeUSD_gt: uni_BigDecimal
+  totalVolumeUSD_lt: uni_BigDecimal
+  totalVolumeUSD_gte: uni_BigDecimal
+  totalVolumeUSD_lte: uni_BigDecimal
+  totalVolumeUSD_in: [uni_BigDecimal!]
+  totalVolumeUSD_not_in: [uni_BigDecimal!]
+  totalVolumeETH: uni_BigDecimal
+  totalVolumeETH_not: uni_BigDecimal
+  totalVolumeETH_gt: uni_BigDecimal
+  totalVolumeETH_lt: uni_BigDecimal
+  totalVolumeETH_gte: uni_BigDecimal
+  totalVolumeETH_lte: uni_BigDecimal
+  totalVolumeETH_in: [uni_BigDecimal!]
+  totalVolumeETH_not_in: [uni_BigDecimal!]
+  totalFeesUSD: uni_BigDecimal
+  totalFeesUSD_not: uni_BigDecimal
+  totalFeesUSD_gt: uni_BigDecimal
+  totalFeesUSD_lt: uni_BigDecimal
+  totalFeesUSD_gte: uni_BigDecimal
+  totalFeesUSD_lte: uni_BigDecimal
+  totalFeesUSD_in: [uni_BigDecimal!]
+  totalFeesUSD_not_in: [uni_BigDecimal!]
+  totalFeesETH: uni_BigDecimal
+  totalFeesETH_not: uni_BigDecimal
+  totalFeesETH_gt: uni_BigDecimal
+  totalFeesETH_lt: uni_BigDecimal
+  totalFeesETH_gte: uni_BigDecimal
+  totalFeesETH_lte: uni_BigDecimal
+  totalFeesETH_in: [uni_BigDecimal!]
+  totalFeesETH_not_in: [uni_BigDecimal!]
+  untrackedVolumeUSD: uni_BigDecimal
+  untrackedVolumeUSD_not: uni_BigDecimal
+  untrackedVolumeUSD_gt: uni_BigDecimal
+  untrackedVolumeUSD_lt: uni_BigDecimal
+  untrackedVolumeUSD_gte: uni_BigDecimal
+  untrackedVolumeUSD_lte: uni_BigDecimal
+  untrackedVolumeUSD_in: [uni_BigDecimal!]
+  untrackedVolumeUSD_not_in: [uni_BigDecimal!]
+  totalValueLockedUSD: uni_BigDecimal
+  totalValueLockedUSD_not: uni_BigDecimal
+  totalValueLockedUSD_gt: uni_BigDecimal
+  totalValueLockedUSD_lt: uni_BigDecimal
+  totalValueLockedUSD_gte: uni_BigDecimal
+  totalValueLockedUSD_lte: uni_BigDecimal
+  totalValueLockedUSD_in: [uni_BigDecimal!]
+  totalValueLockedUSD_not_in: [uni_BigDecimal!]
+  totalValueLockedETH: uni_BigDecimal
+  totalValueLockedETH_not: uni_BigDecimal
+  totalValueLockedETH_gt: uni_BigDecimal
+  totalValueLockedETH_lt: uni_BigDecimal
+  totalValueLockedETH_gte: uni_BigDecimal
+  totalValueLockedETH_lte: uni_BigDecimal
+  totalValueLockedETH_in: [uni_BigDecimal!]
+  totalValueLockedETH_not_in: [uni_BigDecimal!]
+  totalValueLockedUSDUntracked: uni_BigDecimal
+  totalValueLockedUSDUntracked_not: uni_BigDecimal
+  totalValueLockedUSDUntracked_gt: uni_BigDecimal
+  totalValueLockedUSDUntracked_lt: uni_BigDecimal
+  totalValueLockedUSDUntracked_gte: uni_BigDecimal
+  totalValueLockedUSDUntracked_lte: uni_BigDecimal
+  totalValueLockedUSDUntracked_in: [uni_BigDecimal!]
+  totalValueLockedUSDUntracked_not_in: [uni_BigDecimal!]
+  totalValueLockedETHUntracked: uni_BigDecimal
+  totalValueLockedETHUntracked_not: uni_BigDecimal
+  totalValueLockedETHUntracked_gt: uni_BigDecimal
+  totalValueLockedETHUntracked_lt: uni_BigDecimal
+  totalValueLockedETHUntracked_gte: uni_BigDecimal
+  totalValueLockedETHUntracked_lte: uni_BigDecimal
+  totalValueLockedETHUntracked_in: [uni_BigDecimal!]
+  totalValueLockedETHUntracked_not_in: [uni_BigDecimal!]
+  owner: ID
+  owner_not: ID
+  owner_gt: ID
+  owner_lt: ID
+  owner_gte: ID
+  owner_lte: ID
+  owner_in: [ID!]
+  owner_not_in: [ID!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Factory_filter]
+  or: [uni_Factory_filter]
+}
+
+enum uni_Factory_orderBy {
+  id
+  poolCount
+  txCount
+  totalVolumeUSD
+  totalVolumeETH
+  totalFeesUSD
+  totalFeesETH
+  untrackedVolumeUSD
+  totalValueLockedUSD
+  totalValueLockedETH
+  totalValueLockedUSDUntracked
+  totalValueLockedETHUntracked
+  owner
+}
+
+type uni_Flash {
+  id: ID!
+  transaction: uni_Transaction!
+  timestamp: BigInt!
+  pool: uni_Pool!
+  sender: uni_Bytes!
+  recipient: uni_Bytes!
+  amount0: uni_BigDecimal!
+  amount1: uni_BigDecimal!
+  amountUSD: uni_BigDecimal!
+  amount0Paid: uni_BigDecimal!
+  amount1Paid: uni_BigDecimal!
+  logIndex: BigInt
+}
+
+input uni_Flash_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  transaction: String
+  transaction_not: String
+  transaction_gt: String
+  transaction_lt: String
+  transaction_gte: String
+  transaction_lte: String
+  transaction_in: [String!]
+  transaction_not_in: [String!]
+  transaction_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains: String
+  transaction_not_contains_nocase: String
+  transaction_starts_with: String
+  transaction_starts_with_nocase: String
+  transaction_not_starts_with: String
+  transaction_not_starts_with_nocase: String
+  transaction_ends_with: String
+  transaction_ends_with_nocase: String
+  transaction_not_ends_with: String
+  transaction_not_ends_with_nocase: String
+  transaction_: uni_Transaction_filter
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  sender: uni_Bytes
+  sender_not: uni_Bytes
+  sender_gt: uni_Bytes
+  sender_lt: uni_Bytes
+  sender_gte: uni_Bytes
+  sender_lte: uni_Bytes
+  sender_in: [uni_Bytes!]
+  sender_not_in: [uni_Bytes!]
+  sender_contains: uni_Bytes
+  sender_not_contains: uni_Bytes
+  recipient: uni_Bytes
+  recipient_not: uni_Bytes
+  recipient_gt: uni_Bytes
+  recipient_lt: uni_Bytes
+  recipient_gte: uni_Bytes
+  recipient_lte: uni_Bytes
+  recipient_in: [uni_Bytes!]
+  recipient_not_in: [uni_Bytes!]
+  recipient_contains: uni_Bytes
+  recipient_not_contains: uni_Bytes
+  amount0: uni_BigDecimal
+  amount0_not: uni_BigDecimal
+  amount0_gt: uni_BigDecimal
+  amount0_lt: uni_BigDecimal
+  amount0_gte: uni_BigDecimal
+  amount0_lte: uni_BigDecimal
+  amount0_in: [uni_BigDecimal!]
+  amount0_not_in: [uni_BigDecimal!]
+  amount1: uni_BigDecimal
+  amount1_not: uni_BigDecimal
+  amount1_gt: uni_BigDecimal
+  amount1_lt: uni_BigDecimal
+  amount1_gte: uni_BigDecimal
+  amount1_lte: uni_BigDecimal
+  amount1_in: [uni_BigDecimal!]
+  amount1_not_in: [uni_BigDecimal!]
+  amountUSD: uni_BigDecimal
+  amountUSD_not: uni_BigDecimal
+  amountUSD_gt: uni_BigDecimal
+  amountUSD_lt: uni_BigDecimal
+  amountUSD_gte: uni_BigDecimal
+  amountUSD_lte: uni_BigDecimal
+  amountUSD_in: [uni_BigDecimal!]
+  amountUSD_not_in: [uni_BigDecimal!]
+  amount0Paid: uni_BigDecimal
+  amount0Paid_not: uni_BigDecimal
+  amount0Paid_gt: uni_BigDecimal
+  amount0Paid_lt: uni_BigDecimal
+  amount0Paid_gte: uni_BigDecimal
+  amount0Paid_lte: uni_BigDecimal
+  amount0Paid_in: [uni_BigDecimal!]
+  amount0Paid_not_in: [uni_BigDecimal!]
+  amount1Paid: uni_BigDecimal
+  amount1Paid_not: uni_BigDecimal
+  amount1Paid_gt: uni_BigDecimal
+  amount1Paid_lt: uni_BigDecimal
+  amount1Paid_gte: uni_BigDecimal
+  amount1Paid_lte: uni_BigDecimal
+  amount1Paid_in: [uni_BigDecimal!]
+  amount1Paid_not_in: [uni_BigDecimal!]
+  logIndex: BigInt
+  logIndex_not: BigInt
+  logIndex_gt: BigInt
+  logIndex_lt: BigInt
+  logIndex_gte: BigInt
+  logIndex_lte: BigInt
+  logIndex_in: [BigInt!]
+  logIndex_not_in: [BigInt!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Flash_filter]
+  or: [uni_Flash_filter]
+}
+
+enum uni_Flash_orderBy {
+  id
+  transaction
+  transaction__id
+  transaction__blockNumber
+  transaction__timestamp
+  transaction__gasUsed
+  transaction__gasPrice
+  timestamp
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  sender
+  recipient
+  amount0
+  amount1
+  amountUSD
+  amount0Paid
+  amount1Paid
+  logIndex
+}
+
+"""
+8 bytes signed integer
+
+"""
+scalar uni_Int8
+
+type uni_Mint {
+  id: ID!
+  transaction: uni_Transaction!
+  timestamp: BigInt!
+  pool: uni_Pool!
+  token0: uni_Token!
+  token1: uni_Token!
+  owner: uni_Bytes!
+  sender: uni_Bytes
+  origin: uni_Bytes!
+  amount: BigInt!
+  amount0: uni_BigDecimal!
+  amount1: uni_BigDecimal!
+  amountUSD: uni_BigDecimal
+  tickLower: BigInt!
+  tickUpper: BigInt!
+  logIndex: BigInt
+}
+
+input uni_Mint_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  transaction: String
+  transaction_not: String
+  transaction_gt: String
+  transaction_lt: String
+  transaction_gte: String
+  transaction_lte: String
+  transaction_in: [String!]
+  transaction_not_in: [String!]
+  transaction_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains: String
+  transaction_not_contains_nocase: String
+  transaction_starts_with: String
+  transaction_starts_with_nocase: String
+  transaction_not_starts_with: String
+  transaction_not_starts_with_nocase: String
+  transaction_ends_with: String
+  transaction_ends_with_nocase: String
+  transaction_not_ends_with: String
+  transaction_not_ends_with_nocase: String
+  transaction_: uni_Transaction_filter
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  token0: String
+  token0_not: String
+  token0_gt: String
+  token0_lt: String
+  token0_gte: String
+  token0_lte: String
+  token0_in: [String!]
+  token0_not_in: [String!]
+  token0_contains: String
+  token0_contains_nocase: String
+  token0_not_contains: String
+  token0_not_contains_nocase: String
+  token0_starts_with: String
+  token0_starts_with_nocase: String
+  token0_not_starts_with: String
+  token0_not_starts_with_nocase: String
+  token0_ends_with: String
+  token0_ends_with_nocase: String
+  token0_not_ends_with: String
+  token0_not_ends_with_nocase: String
+  token0_: uni_Token_filter
+  token1: String
+  token1_not: String
+  token1_gt: String
+  token1_lt: String
+  token1_gte: String
+  token1_lte: String
+  token1_in: [String!]
+  token1_not_in: [String!]
+  token1_contains: String
+  token1_contains_nocase: String
+  token1_not_contains: String
+  token1_not_contains_nocase: String
+  token1_starts_with: String
+  token1_starts_with_nocase: String
+  token1_not_starts_with: String
+  token1_not_starts_with_nocase: String
+  token1_ends_with: String
+  token1_ends_with_nocase: String
+  token1_not_ends_with: String
+  token1_not_ends_with_nocase: String
+  token1_: uni_Token_filter
+  owner: uni_Bytes
+  owner_not: uni_Bytes
+  owner_gt: uni_Bytes
+  owner_lt: uni_Bytes
+  owner_gte: uni_Bytes
+  owner_lte: uni_Bytes
+  owner_in: [uni_Bytes!]
+  owner_not_in: [uni_Bytes!]
+  owner_contains: uni_Bytes
+  owner_not_contains: uni_Bytes
+  sender: uni_Bytes
+  sender_not: uni_Bytes
+  sender_gt: uni_Bytes
+  sender_lt: uni_Bytes
+  sender_gte: uni_Bytes
+  sender_lte: uni_Bytes
+  sender_in: [uni_Bytes!]
+  sender_not_in: [uni_Bytes!]
+  sender_contains: uni_Bytes
+  sender_not_contains: uni_Bytes
+  origin: uni_Bytes
+  origin_not: uni_Bytes
+  origin_gt: uni_Bytes
+  origin_lt: uni_Bytes
+  origin_gte: uni_Bytes
+  origin_lte: uni_Bytes
+  origin_in: [uni_Bytes!]
+  origin_not_in: [uni_Bytes!]
+  origin_contains: uni_Bytes
+  origin_not_contains: uni_Bytes
+  amount: BigInt
+  amount_not: BigInt
+  amount_gt: BigInt
+  amount_lt: BigInt
+  amount_gte: BigInt
+  amount_lte: BigInt
+  amount_in: [BigInt!]
+  amount_not_in: [BigInt!]
+  amount0: uni_BigDecimal
+  amount0_not: uni_BigDecimal
+  amount0_gt: uni_BigDecimal
+  amount0_lt: uni_BigDecimal
+  amount0_gte: uni_BigDecimal
+  amount0_lte: uni_BigDecimal
+  amount0_in: [uni_BigDecimal!]
+  amount0_not_in: [uni_BigDecimal!]
+  amount1: uni_BigDecimal
+  amount1_not: uni_BigDecimal
+  amount1_gt: uni_BigDecimal
+  amount1_lt: uni_BigDecimal
+  amount1_gte: uni_BigDecimal
+  amount1_lte: uni_BigDecimal
+  amount1_in: [uni_BigDecimal!]
+  amount1_not_in: [uni_BigDecimal!]
+  amountUSD: uni_BigDecimal
+  amountUSD_not: uni_BigDecimal
+  amountUSD_gt: uni_BigDecimal
+  amountUSD_lt: uni_BigDecimal
+  amountUSD_gte: uni_BigDecimal
+  amountUSD_lte: uni_BigDecimal
+  amountUSD_in: [uni_BigDecimal!]
+  amountUSD_not_in: [uni_BigDecimal!]
+  tickLower: BigInt
+  tickLower_not: BigInt
+  tickLower_gt: BigInt
+  tickLower_lt: BigInt
+  tickLower_gte: BigInt
+  tickLower_lte: BigInt
+  tickLower_in: [BigInt!]
+  tickLower_not_in: [BigInt!]
+  tickUpper: BigInt
+  tickUpper_not: BigInt
+  tickUpper_gt: BigInt
+  tickUpper_lt: BigInt
+  tickUpper_gte: BigInt
+  tickUpper_lte: BigInt
+  tickUpper_in: [BigInt!]
+  tickUpper_not_in: [BigInt!]
+  logIndex: BigInt
+  logIndex_not: BigInt
+  logIndex_gt: BigInt
+  logIndex_lt: BigInt
+  logIndex_gte: BigInt
+  logIndex_lte: BigInt
+  logIndex_in: [BigInt!]
+  logIndex_not_in: [BigInt!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Mint_filter]
+  or: [uni_Mint_filter]
+}
+
+enum uni_Mint_orderBy {
+  id
+  transaction
+  transaction__id
+  transaction__blockNumber
+  transaction__timestamp
+  transaction__gasUsed
+  transaction__gasPrice
+  timestamp
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  token0
+  token0__id
+  token0__symbol
+  token0__name
+  token0__decimals
+  token0__totalSupply
+  token0__volume
+  token0__volumeUSD
+  token0__untrackedVolumeUSD
+  token0__feesUSD
+  token0__txCount
+  token0__poolCount
+  token0__totalValueLocked
+  token0__totalValueLockedUSD
+  token0__totalValueLockedUSDUntracked
+  token0__derivedETH
+  token1
+  token1__id
+  token1__symbol
+  token1__name
+  token1__decimals
+  token1__totalSupply
+  token1__volume
+  token1__volumeUSD
+  token1__untrackedVolumeUSD
+  token1__feesUSD
+  token1__txCount
+  token1__poolCount
+  token1__totalValueLocked
+  token1__totalValueLockedUSD
+  token1__totalValueLockedUSDUntracked
+  token1__derivedETH
+  owner
+  sender
+  origin
+  amount
+  amount0
+  amount1
+  amountUSD
+  tickLower
+  tickUpper
+  logIndex
+}
+
+"""Defines the order direction, either ascending or descending"""
+enum uni_OrderDirection {
+  asc
+  desc
+}
+
+type uni_Pool {
+  id: ID!
+  createdAtTimestamp: BigInt!
+  createdAtBlockNumber: BigInt!
+  token0: uni_Token!
+  token1: uni_Token!
+  feeTier: BigInt!
+  liquidity: BigInt!
+  sqrtPrice: BigInt!
+  feeGrowthGlobal0X128: BigInt!
+  feeGrowthGlobal1X128: BigInt!
+  token0Price: uni_BigDecimal!
+  token1Price: uni_BigDecimal!
+  tick: BigInt
+  observationIndex: BigInt!
+  volumeToken0: uni_BigDecimal!
+  volumeToken1: uni_BigDecimal!
+  volumeUSD: uni_BigDecimal!
+  untrackedVolumeUSD: uni_BigDecimal!
+  feesUSD: uni_BigDecimal!
+  txCount: BigInt!
+  collectedFeesToken0: uni_BigDecimal!
+  collectedFeesToken1: uni_BigDecimal!
+  collectedFeesUSD: uni_BigDecimal!
+  totalValueLockedToken0: uni_BigDecimal!
+  totalValueLockedToken1: uni_BigDecimal!
+  totalValueLockedETH: uni_BigDecimal!
+  totalValueLockedUSD: uni_BigDecimal!
+  totalValueLockedUSDUntracked: uni_BigDecimal!
+  liquidityProviderCount: BigInt!
+  poolHourData(skip: Int = 0, first: Int = 100, orderBy: uni_PoolHourData_orderBy, orderDirection: uni_OrderDirection, where: uni_PoolHourData_filter): [uni_PoolHourData!]!
+  poolDayData(skip: Int = 0, first: Int = 100, orderBy: uni_PoolDayData_orderBy, orderDirection: uni_OrderDirection, where: uni_PoolDayData_filter): [uni_PoolDayData!]!
+  mints(skip: Int = 0, first: Int = 100, orderBy: uni_Mint_orderBy, orderDirection: uni_OrderDirection, where: uni_Mint_filter): [uni_Mint!]!
+  burns(skip: Int = 0, first: Int = 100, orderBy: uni_Burn_orderBy, orderDirection: uni_OrderDirection, where: uni_Burn_filter): [uni_Burn!]!
+  swaps(skip: Int = 0, first: Int = 100, orderBy: uni_Swap_orderBy, orderDirection: uni_OrderDirection, where: uni_Swap_filter): [uni_Swap!]!
+  collects(skip: Int = 0, first: Int = 100, orderBy: uni_Collect_orderBy, orderDirection: uni_OrderDirection, where: uni_Collect_filter): [uni_Collect!]!
+  ticks(skip: Int = 0, first: Int = 100, orderBy: uni_Tick_orderBy, orderDirection: uni_OrderDirection, where: uni_Tick_filter): [uni_Tick!]!
+}
+
+type uni_PoolDayData {
+  id: ID!
+  date: Int!
+  pool: uni_Pool!
+  liquidity: BigInt!
+  sqrtPrice: BigInt!
+  token0Price: uni_BigDecimal!
+  token1Price: uni_BigDecimal!
+  tick: BigInt
+  feeGrowthGlobal0X128: BigInt!
+  feeGrowthGlobal1X128: BigInt!
+  tvlUSD: uni_BigDecimal!
+  volumeToken0: uni_BigDecimal!
+  volumeToken1: uni_BigDecimal!
+  volumeUSD: uni_BigDecimal!
+  feesUSD: uni_BigDecimal!
+  txCount: BigInt!
+  open: uni_BigDecimal!
+  high: uni_BigDecimal!
+  low: uni_BigDecimal!
+  close: uni_BigDecimal!
+}
+
+input uni_PoolDayData_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  date: Int
+  date_not: Int
+  date_gt: Int
+  date_lt: Int
+  date_gte: Int
+  date_lte: Int
+  date_in: [Int!]
+  date_not_in: [Int!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  liquidity: BigInt
+  liquidity_not: BigInt
+  liquidity_gt: BigInt
+  liquidity_lt: BigInt
+  liquidity_gte: BigInt
+  liquidity_lte: BigInt
+  liquidity_in: [BigInt!]
+  liquidity_not_in: [BigInt!]
+  sqrtPrice: BigInt
+  sqrtPrice_not: BigInt
+  sqrtPrice_gt: BigInt
+  sqrtPrice_lt: BigInt
+  sqrtPrice_gte: BigInt
+  sqrtPrice_lte: BigInt
+  sqrtPrice_in: [BigInt!]
+  sqrtPrice_not_in: [BigInt!]
+  token0Price: uni_BigDecimal
+  token0Price_not: uni_BigDecimal
+  token0Price_gt: uni_BigDecimal
+  token0Price_lt: uni_BigDecimal
+  token0Price_gte: uni_BigDecimal
+  token0Price_lte: uni_BigDecimal
+  token0Price_in: [uni_BigDecimal!]
+  token0Price_not_in: [uni_BigDecimal!]
+  token1Price: uni_BigDecimal
+  token1Price_not: uni_BigDecimal
+  token1Price_gt: uni_BigDecimal
+  token1Price_lt: uni_BigDecimal
+  token1Price_gte: uni_BigDecimal
+  token1Price_lte: uni_BigDecimal
+  token1Price_in: [uni_BigDecimal!]
+  token1Price_not_in: [uni_BigDecimal!]
+  tick: BigInt
+  tick_not: BigInt
+  tick_gt: BigInt
+  tick_lt: BigInt
+  tick_gte: BigInt
+  tick_lte: BigInt
+  tick_in: [BigInt!]
+  tick_not_in: [BigInt!]
+  feeGrowthGlobal0X128: BigInt
+  feeGrowthGlobal0X128_not: BigInt
+  feeGrowthGlobal0X128_gt: BigInt
+  feeGrowthGlobal0X128_lt: BigInt
+  feeGrowthGlobal0X128_gte: BigInt
+  feeGrowthGlobal0X128_lte: BigInt
+  feeGrowthGlobal0X128_in: [BigInt!]
+  feeGrowthGlobal0X128_not_in: [BigInt!]
+  feeGrowthGlobal1X128: BigInt
+  feeGrowthGlobal1X128_not: BigInt
+  feeGrowthGlobal1X128_gt: BigInt
+  feeGrowthGlobal1X128_lt: BigInt
+  feeGrowthGlobal1X128_gte: BigInt
+  feeGrowthGlobal1X128_lte: BigInt
+  feeGrowthGlobal1X128_in: [BigInt!]
+  feeGrowthGlobal1X128_not_in: [BigInt!]
+  tvlUSD: uni_BigDecimal
+  tvlUSD_not: uni_BigDecimal
+  tvlUSD_gt: uni_BigDecimal
+  tvlUSD_lt: uni_BigDecimal
+  tvlUSD_gte: uni_BigDecimal
+  tvlUSD_lte: uni_BigDecimal
+  tvlUSD_in: [uni_BigDecimal!]
+  tvlUSD_not_in: [uni_BigDecimal!]
+  volumeToken0: uni_BigDecimal
+  volumeToken0_not: uni_BigDecimal
+  volumeToken0_gt: uni_BigDecimal
+  volumeToken0_lt: uni_BigDecimal
+  volumeToken0_gte: uni_BigDecimal
+  volumeToken0_lte: uni_BigDecimal
+  volumeToken0_in: [uni_BigDecimal!]
+  volumeToken0_not_in: [uni_BigDecimal!]
+  volumeToken1: uni_BigDecimal
+  volumeToken1_not: uni_BigDecimal
+  volumeToken1_gt: uni_BigDecimal
+  volumeToken1_lt: uni_BigDecimal
+  volumeToken1_gte: uni_BigDecimal
+  volumeToken1_lte: uni_BigDecimal
+  volumeToken1_in: [uni_BigDecimal!]
+  volumeToken1_not_in: [uni_BigDecimal!]
+  volumeUSD: uni_BigDecimal
+  volumeUSD_not: uni_BigDecimal
+  volumeUSD_gt: uni_BigDecimal
+  volumeUSD_lt: uni_BigDecimal
+  volumeUSD_gte: uni_BigDecimal
+  volumeUSD_lte: uni_BigDecimal
+  volumeUSD_in: [uni_BigDecimal!]
+  volumeUSD_not_in: [uni_BigDecimal!]
+  feesUSD: uni_BigDecimal
+  feesUSD_not: uni_BigDecimal
+  feesUSD_gt: uni_BigDecimal
+  feesUSD_lt: uni_BigDecimal
+  feesUSD_gte: uni_BigDecimal
+  feesUSD_lte: uni_BigDecimal
+  feesUSD_in: [uni_BigDecimal!]
+  feesUSD_not_in: [uni_BigDecimal!]
+  txCount: BigInt
+  txCount_not: BigInt
+  txCount_gt: BigInt
+  txCount_lt: BigInt
+  txCount_gte: BigInt
+  txCount_lte: BigInt
+  txCount_in: [BigInt!]
+  txCount_not_in: [BigInt!]
+  open: uni_BigDecimal
+  open_not: uni_BigDecimal
+  open_gt: uni_BigDecimal
+  open_lt: uni_BigDecimal
+  open_gte: uni_BigDecimal
+  open_lte: uni_BigDecimal
+  open_in: [uni_BigDecimal!]
+  open_not_in: [uni_BigDecimal!]
+  high: uni_BigDecimal
+  high_not: uni_BigDecimal
+  high_gt: uni_BigDecimal
+  high_lt: uni_BigDecimal
+  high_gte: uni_BigDecimal
+  high_lte: uni_BigDecimal
+  high_in: [uni_BigDecimal!]
+  high_not_in: [uni_BigDecimal!]
+  low: uni_BigDecimal
+  low_not: uni_BigDecimal
+  low_gt: uni_BigDecimal
+  low_lt: uni_BigDecimal
+  low_gte: uni_BigDecimal
+  low_lte: uni_BigDecimal
+  low_in: [uni_BigDecimal!]
+  low_not_in: [uni_BigDecimal!]
+  close: uni_BigDecimal
+  close_not: uni_BigDecimal
+  close_gt: uni_BigDecimal
+  close_lt: uni_BigDecimal
+  close_gte: uni_BigDecimal
+  close_lte: uni_BigDecimal
+  close_in: [uni_BigDecimal!]
+  close_not_in: [uni_BigDecimal!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_PoolDayData_filter]
+  or: [uni_PoolDayData_filter]
+}
+
+enum uni_PoolDayData_orderBy {
+  id
+  date
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  liquidity
+  sqrtPrice
+  token0Price
+  token1Price
+  tick
+  feeGrowthGlobal0X128
+  feeGrowthGlobal1X128
+  tvlUSD
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  feesUSD
+  txCount
+  open
+  high
+  low
+  close
+}
+
+type uni_PoolHourData {
+  id: ID!
+  periodStartUnix: Int!
+  pool: uni_Pool!
+  liquidity: BigInt!
+  sqrtPrice: BigInt!
+  token0Price: uni_BigDecimal!
+  token1Price: uni_BigDecimal!
+  tick: BigInt
+  feeGrowthGlobal0X128: BigInt!
+  feeGrowthGlobal1X128: BigInt!
+  tvlUSD: uni_BigDecimal!
+  volumeToken0: uni_BigDecimal!
+  volumeToken1: uni_BigDecimal!
+  volumeUSD: uni_BigDecimal!
+  feesUSD: uni_BigDecimal!
+  txCount: BigInt!
+  open: uni_BigDecimal!
+  high: uni_BigDecimal!
+  low: uni_BigDecimal!
+  close: uni_BigDecimal!
+}
+
+input uni_PoolHourData_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  periodStartUnix: Int
+  periodStartUnix_not: Int
+  periodStartUnix_gt: Int
+  periodStartUnix_lt: Int
+  periodStartUnix_gte: Int
+  periodStartUnix_lte: Int
+  periodStartUnix_in: [Int!]
+  periodStartUnix_not_in: [Int!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  liquidity: BigInt
+  liquidity_not: BigInt
+  liquidity_gt: BigInt
+  liquidity_lt: BigInt
+  liquidity_gte: BigInt
+  liquidity_lte: BigInt
+  liquidity_in: [BigInt!]
+  liquidity_not_in: [BigInt!]
+  sqrtPrice: BigInt
+  sqrtPrice_not: BigInt
+  sqrtPrice_gt: BigInt
+  sqrtPrice_lt: BigInt
+  sqrtPrice_gte: BigInt
+  sqrtPrice_lte: BigInt
+  sqrtPrice_in: [BigInt!]
+  sqrtPrice_not_in: [BigInt!]
+  token0Price: uni_BigDecimal
+  token0Price_not: uni_BigDecimal
+  token0Price_gt: uni_BigDecimal
+  token0Price_lt: uni_BigDecimal
+  token0Price_gte: uni_BigDecimal
+  token0Price_lte: uni_BigDecimal
+  token0Price_in: [uni_BigDecimal!]
+  token0Price_not_in: [uni_BigDecimal!]
+  token1Price: uni_BigDecimal
+  token1Price_not: uni_BigDecimal
+  token1Price_gt: uni_BigDecimal
+  token1Price_lt: uni_BigDecimal
+  token1Price_gte: uni_BigDecimal
+  token1Price_lte: uni_BigDecimal
+  token1Price_in: [uni_BigDecimal!]
+  token1Price_not_in: [uni_BigDecimal!]
+  tick: BigInt
+  tick_not: BigInt
+  tick_gt: BigInt
+  tick_lt: BigInt
+  tick_gte: BigInt
+  tick_lte: BigInt
+  tick_in: [BigInt!]
+  tick_not_in: [BigInt!]
+  feeGrowthGlobal0X128: BigInt
+  feeGrowthGlobal0X128_not: BigInt
+  feeGrowthGlobal0X128_gt: BigInt
+  feeGrowthGlobal0X128_lt: BigInt
+  feeGrowthGlobal0X128_gte: BigInt
+  feeGrowthGlobal0X128_lte: BigInt
+  feeGrowthGlobal0X128_in: [BigInt!]
+  feeGrowthGlobal0X128_not_in: [BigInt!]
+  feeGrowthGlobal1X128: BigInt
+  feeGrowthGlobal1X128_not: BigInt
+  feeGrowthGlobal1X128_gt: BigInt
+  feeGrowthGlobal1X128_lt: BigInt
+  feeGrowthGlobal1X128_gte: BigInt
+  feeGrowthGlobal1X128_lte: BigInt
+  feeGrowthGlobal1X128_in: [BigInt!]
+  feeGrowthGlobal1X128_not_in: [BigInt!]
+  tvlUSD: uni_BigDecimal
+  tvlUSD_not: uni_BigDecimal
+  tvlUSD_gt: uni_BigDecimal
+  tvlUSD_lt: uni_BigDecimal
+  tvlUSD_gte: uni_BigDecimal
+  tvlUSD_lte: uni_BigDecimal
+  tvlUSD_in: [uni_BigDecimal!]
+  tvlUSD_not_in: [uni_BigDecimal!]
+  volumeToken0: uni_BigDecimal
+  volumeToken0_not: uni_BigDecimal
+  volumeToken0_gt: uni_BigDecimal
+  volumeToken0_lt: uni_BigDecimal
+  volumeToken0_gte: uni_BigDecimal
+  volumeToken0_lte: uni_BigDecimal
+  volumeToken0_in: [uni_BigDecimal!]
+  volumeToken0_not_in: [uni_BigDecimal!]
+  volumeToken1: uni_BigDecimal
+  volumeToken1_not: uni_BigDecimal
+  volumeToken1_gt: uni_BigDecimal
+  volumeToken1_lt: uni_BigDecimal
+  volumeToken1_gte: uni_BigDecimal
+  volumeToken1_lte: uni_BigDecimal
+  volumeToken1_in: [uni_BigDecimal!]
+  volumeToken1_not_in: [uni_BigDecimal!]
+  volumeUSD: uni_BigDecimal
+  volumeUSD_not: uni_BigDecimal
+  volumeUSD_gt: uni_BigDecimal
+  volumeUSD_lt: uni_BigDecimal
+  volumeUSD_gte: uni_BigDecimal
+  volumeUSD_lte: uni_BigDecimal
+  volumeUSD_in: [uni_BigDecimal!]
+  volumeUSD_not_in: [uni_BigDecimal!]
+  feesUSD: uni_BigDecimal
+  feesUSD_not: uni_BigDecimal
+  feesUSD_gt: uni_BigDecimal
+  feesUSD_lt: uni_BigDecimal
+  feesUSD_gte: uni_BigDecimal
+  feesUSD_lte: uni_BigDecimal
+  feesUSD_in: [uni_BigDecimal!]
+  feesUSD_not_in: [uni_BigDecimal!]
+  txCount: BigInt
+  txCount_not: BigInt
+  txCount_gt: BigInt
+  txCount_lt: BigInt
+  txCount_gte: BigInt
+  txCount_lte: BigInt
+  txCount_in: [BigInt!]
+  txCount_not_in: [BigInt!]
+  open: uni_BigDecimal
+  open_not: uni_BigDecimal
+  open_gt: uni_BigDecimal
+  open_lt: uni_BigDecimal
+  open_gte: uni_BigDecimal
+  open_lte: uni_BigDecimal
+  open_in: [uni_BigDecimal!]
+  open_not_in: [uni_BigDecimal!]
+  high: uni_BigDecimal
+  high_not: uni_BigDecimal
+  high_gt: uni_BigDecimal
+  high_lt: uni_BigDecimal
+  high_gte: uni_BigDecimal
+  high_lte: uni_BigDecimal
+  high_in: [uni_BigDecimal!]
+  high_not_in: [uni_BigDecimal!]
+  low: uni_BigDecimal
+  low_not: uni_BigDecimal
+  low_gt: uni_BigDecimal
+  low_lt: uni_BigDecimal
+  low_gte: uni_BigDecimal
+  low_lte: uni_BigDecimal
+  low_in: [uni_BigDecimal!]
+  low_not_in: [uni_BigDecimal!]
+  close: uni_BigDecimal
+  close_not: uni_BigDecimal
+  close_gt: uni_BigDecimal
+  close_lt: uni_BigDecimal
+  close_gte: uni_BigDecimal
+  close_lte: uni_BigDecimal
+  close_in: [uni_BigDecimal!]
+  close_not_in: [uni_BigDecimal!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_PoolHourData_filter]
+  or: [uni_PoolHourData_filter]
+}
+
+enum uni_PoolHourData_orderBy {
+  id
+  periodStartUnix
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  liquidity
+  sqrtPrice
+  token0Price
+  token1Price
+  tick
+  feeGrowthGlobal0X128
+  feeGrowthGlobal1X128
+  tvlUSD
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  feesUSD
+  txCount
+  open
+  high
+  low
+  close
+}
+
+input uni_Pool_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  createdAtTimestamp: BigInt
+  createdAtTimestamp_not: BigInt
+  createdAtTimestamp_gt: BigInt
+  createdAtTimestamp_lt: BigInt
+  createdAtTimestamp_gte: BigInt
+  createdAtTimestamp_lte: BigInt
+  createdAtTimestamp_in: [BigInt!]
+  createdAtTimestamp_not_in: [BigInt!]
+  createdAtBlockNumber: BigInt
+  createdAtBlockNumber_not: BigInt
+  createdAtBlockNumber_gt: BigInt
+  createdAtBlockNumber_lt: BigInt
+  createdAtBlockNumber_gte: BigInt
+  createdAtBlockNumber_lte: BigInt
+  createdAtBlockNumber_in: [BigInt!]
+  createdAtBlockNumber_not_in: [BigInt!]
+  token0: String
+  token0_not: String
+  token0_gt: String
+  token0_lt: String
+  token0_gte: String
+  token0_lte: String
+  token0_in: [String!]
+  token0_not_in: [String!]
+  token0_contains: String
+  token0_contains_nocase: String
+  token0_not_contains: String
+  token0_not_contains_nocase: String
+  token0_starts_with: String
+  token0_starts_with_nocase: String
+  token0_not_starts_with: String
+  token0_not_starts_with_nocase: String
+  token0_ends_with: String
+  token0_ends_with_nocase: String
+  token0_not_ends_with: String
+  token0_not_ends_with_nocase: String
+  token0_: uni_Token_filter
+  token1: String
+  token1_not: String
+  token1_gt: String
+  token1_lt: String
+  token1_gte: String
+  token1_lte: String
+  token1_in: [String!]
+  token1_not_in: [String!]
+  token1_contains: String
+  token1_contains_nocase: String
+  token1_not_contains: String
+  token1_not_contains_nocase: String
+  token1_starts_with: String
+  token1_starts_with_nocase: String
+  token1_not_starts_with: String
+  token1_not_starts_with_nocase: String
+  token1_ends_with: String
+  token1_ends_with_nocase: String
+  token1_not_ends_with: String
+  token1_not_ends_with_nocase: String
+  token1_: uni_Token_filter
+  feeTier: BigInt
+  feeTier_not: BigInt
+  feeTier_gt: BigInt
+  feeTier_lt: BigInt
+  feeTier_gte: BigInt
+  feeTier_lte: BigInt
+  feeTier_in: [BigInt!]
+  feeTier_not_in: [BigInt!]
+  liquidity: BigInt
+  liquidity_not: BigInt
+  liquidity_gt: BigInt
+  liquidity_lt: BigInt
+  liquidity_gte: BigInt
+  liquidity_lte: BigInt
+  liquidity_in: [BigInt!]
+  liquidity_not_in: [BigInt!]
+  sqrtPrice: BigInt
+  sqrtPrice_not: BigInt
+  sqrtPrice_gt: BigInt
+  sqrtPrice_lt: BigInt
+  sqrtPrice_gte: BigInt
+  sqrtPrice_lte: BigInt
+  sqrtPrice_in: [BigInt!]
+  sqrtPrice_not_in: [BigInt!]
+  feeGrowthGlobal0X128: BigInt
+  feeGrowthGlobal0X128_not: BigInt
+  feeGrowthGlobal0X128_gt: BigInt
+  feeGrowthGlobal0X128_lt: BigInt
+  feeGrowthGlobal0X128_gte: BigInt
+  feeGrowthGlobal0X128_lte: BigInt
+  feeGrowthGlobal0X128_in: [BigInt!]
+  feeGrowthGlobal0X128_not_in: [BigInt!]
+  feeGrowthGlobal1X128: BigInt
+  feeGrowthGlobal1X128_not: BigInt
+  feeGrowthGlobal1X128_gt: BigInt
+  feeGrowthGlobal1X128_lt: BigInt
+  feeGrowthGlobal1X128_gte: BigInt
+  feeGrowthGlobal1X128_lte: BigInt
+  feeGrowthGlobal1X128_in: [BigInt!]
+  feeGrowthGlobal1X128_not_in: [BigInt!]
+  token0Price: uni_BigDecimal
+  token0Price_not: uni_BigDecimal
+  token0Price_gt: uni_BigDecimal
+  token0Price_lt: uni_BigDecimal
+  token0Price_gte: uni_BigDecimal
+  token0Price_lte: uni_BigDecimal
+  token0Price_in: [uni_BigDecimal!]
+  token0Price_not_in: [uni_BigDecimal!]
+  token1Price: uni_BigDecimal
+  token1Price_not: uni_BigDecimal
+  token1Price_gt: uni_BigDecimal
+  token1Price_lt: uni_BigDecimal
+  token1Price_gte: uni_BigDecimal
+  token1Price_lte: uni_BigDecimal
+  token1Price_in: [uni_BigDecimal!]
+  token1Price_not_in: [uni_BigDecimal!]
+  tick: BigInt
+  tick_not: BigInt
+  tick_gt: BigInt
+  tick_lt: BigInt
+  tick_gte: BigInt
+  tick_lte: BigInt
+  tick_in: [BigInt!]
+  tick_not_in: [BigInt!]
+  observationIndex: BigInt
+  observationIndex_not: BigInt
+  observationIndex_gt: BigInt
+  observationIndex_lt: BigInt
+  observationIndex_gte: BigInt
+  observationIndex_lte: BigInt
+  observationIndex_in: [BigInt!]
+  observationIndex_not_in: [BigInt!]
+  volumeToken0: uni_BigDecimal
+  volumeToken0_not: uni_BigDecimal
+  volumeToken0_gt: uni_BigDecimal
+  volumeToken0_lt: uni_BigDecimal
+  volumeToken0_gte: uni_BigDecimal
+  volumeToken0_lte: uni_BigDecimal
+  volumeToken0_in: [uni_BigDecimal!]
+  volumeToken0_not_in: [uni_BigDecimal!]
+  volumeToken1: uni_BigDecimal
+  volumeToken1_not: uni_BigDecimal
+  volumeToken1_gt: uni_BigDecimal
+  volumeToken1_lt: uni_BigDecimal
+  volumeToken1_gte: uni_BigDecimal
+  volumeToken1_lte: uni_BigDecimal
+  volumeToken1_in: [uni_BigDecimal!]
+  volumeToken1_not_in: [uni_BigDecimal!]
+  volumeUSD: uni_BigDecimal
+  volumeUSD_not: uni_BigDecimal
+  volumeUSD_gt: uni_BigDecimal
+  volumeUSD_lt: uni_BigDecimal
+  volumeUSD_gte: uni_BigDecimal
+  volumeUSD_lte: uni_BigDecimal
+  volumeUSD_in: [uni_BigDecimal!]
+  volumeUSD_not_in: [uni_BigDecimal!]
+  untrackedVolumeUSD: uni_BigDecimal
+  untrackedVolumeUSD_not: uni_BigDecimal
+  untrackedVolumeUSD_gt: uni_BigDecimal
+  untrackedVolumeUSD_lt: uni_BigDecimal
+  untrackedVolumeUSD_gte: uni_BigDecimal
+  untrackedVolumeUSD_lte: uni_BigDecimal
+  untrackedVolumeUSD_in: [uni_BigDecimal!]
+  untrackedVolumeUSD_not_in: [uni_BigDecimal!]
+  feesUSD: uni_BigDecimal
+  feesUSD_not: uni_BigDecimal
+  feesUSD_gt: uni_BigDecimal
+  feesUSD_lt: uni_BigDecimal
+  feesUSD_gte: uni_BigDecimal
+  feesUSD_lte: uni_BigDecimal
+  feesUSD_in: [uni_BigDecimal!]
+  feesUSD_not_in: [uni_BigDecimal!]
+  txCount: BigInt
+  txCount_not: BigInt
+  txCount_gt: BigInt
+  txCount_lt: BigInt
+  txCount_gte: BigInt
+  txCount_lte: BigInt
+  txCount_in: [BigInt!]
+  txCount_not_in: [BigInt!]
+  collectedFeesToken0: uni_BigDecimal
+  collectedFeesToken0_not: uni_BigDecimal
+  collectedFeesToken0_gt: uni_BigDecimal
+  collectedFeesToken0_lt: uni_BigDecimal
+  collectedFeesToken0_gte: uni_BigDecimal
+  collectedFeesToken0_lte: uni_BigDecimal
+  collectedFeesToken0_in: [uni_BigDecimal!]
+  collectedFeesToken0_not_in: [uni_BigDecimal!]
+  collectedFeesToken1: uni_BigDecimal
+  collectedFeesToken1_not: uni_BigDecimal
+  collectedFeesToken1_gt: uni_BigDecimal
+  collectedFeesToken1_lt: uni_BigDecimal
+  collectedFeesToken1_gte: uni_BigDecimal
+  collectedFeesToken1_lte: uni_BigDecimal
+  collectedFeesToken1_in: [uni_BigDecimal!]
+  collectedFeesToken1_not_in: [uni_BigDecimal!]
+  collectedFeesUSD: uni_BigDecimal
+  collectedFeesUSD_not: uni_BigDecimal
+  collectedFeesUSD_gt: uni_BigDecimal
+  collectedFeesUSD_lt: uni_BigDecimal
+  collectedFeesUSD_gte: uni_BigDecimal
+  collectedFeesUSD_lte: uni_BigDecimal
+  collectedFeesUSD_in: [uni_BigDecimal!]
+  collectedFeesUSD_not_in: [uni_BigDecimal!]
+  totalValueLockedToken0: uni_BigDecimal
+  totalValueLockedToken0_not: uni_BigDecimal
+  totalValueLockedToken0_gt: uni_BigDecimal
+  totalValueLockedToken0_lt: uni_BigDecimal
+  totalValueLockedToken0_gte: uni_BigDecimal
+  totalValueLockedToken0_lte: uni_BigDecimal
+  totalValueLockedToken0_in: [uni_BigDecimal!]
+  totalValueLockedToken0_not_in: [uni_BigDecimal!]
+  totalValueLockedToken1: uni_BigDecimal
+  totalValueLockedToken1_not: uni_BigDecimal
+  totalValueLockedToken1_gt: uni_BigDecimal
+  totalValueLockedToken1_lt: uni_BigDecimal
+  totalValueLockedToken1_gte: uni_BigDecimal
+  totalValueLockedToken1_lte: uni_BigDecimal
+  totalValueLockedToken1_in: [uni_BigDecimal!]
+  totalValueLockedToken1_not_in: [uni_BigDecimal!]
+  totalValueLockedETH: uni_BigDecimal
+  totalValueLockedETH_not: uni_BigDecimal
+  totalValueLockedETH_gt: uni_BigDecimal
+  totalValueLockedETH_lt: uni_BigDecimal
+  totalValueLockedETH_gte: uni_BigDecimal
+  totalValueLockedETH_lte: uni_BigDecimal
+  totalValueLockedETH_in: [uni_BigDecimal!]
+  totalValueLockedETH_not_in: [uni_BigDecimal!]
+  totalValueLockedUSD: uni_BigDecimal
+  totalValueLockedUSD_not: uni_BigDecimal
+  totalValueLockedUSD_gt: uni_BigDecimal
+  totalValueLockedUSD_lt: uni_BigDecimal
+  totalValueLockedUSD_gte: uni_BigDecimal
+  totalValueLockedUSD_lte: uni_BigDecimal
+  totalValueLockedUSD_in: [uni_BigDecimal!]
+  totalValueLockedUSD_not_in: [uni_BigDecimal!]
+  totalValueLockedUSDUntracked: uni_BigDecimal
+  totalValueLockedUSDUntracked_not: uni_BigDecimal
+  totalValueLockedUSDUntracked_gt: uni_BigDecimal
+  totalValueLockedUSDUntracked_lt: uni_BigDecimal
+  totalValueLockedUSDUntracked_gte: uni_BigDecimal
+  totalValueLockedUSDUntracked_lte: uni_BigDecimal
+  totalValueLockedUSDUntracked_in: [uni_BigDecimal!]
+  totalValueLockedUSDUntracked_not_in: [uni_BigDecimal!]
+  liquidityProviderCount: BigInt
+  liquidityProviderCount_not: BigInt
+  liquidityProviderCount_gt: BigInt
+  liquidityProviderCount_lt: BigInt
+  liquidityProviderCount_gte: BigInt
+  liquidityProviderCount_lte: BigInt
+  liquidityProviderCount_in: [BigInt!]
+  liquidityProviderCount_not_in: [BigInt!]
+  poolHourData_: uni_PoolHourData_filter
+  poolDayData_: uni_PoolDayData_filter
+  mints_: uni_Mint_filter
+  burns_: uni_Burn_filter
+  swaps_: uni_Swap_filter
+  collects_: uni_Collect_filter
+  ticks_: uni_Tick_filter
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Pool_filter]
+  or: [uni_Pool_filter]
+}
+
+enum uni_Pool_orderBy {
+  id
+  createdAtTimestamp
+  createdAtBlockNumber
+  token0
+  token0__id
+  token0__symbol
+  token0__name
+  token0__decimals
+  token0__totalSupply
+  token0__volume
+  token0__volumeUSD
+  token0__untrackedVolumeUSD
+  token0__feesUSD
+  token0__txCount
+  token0__poolCount
+  token0__totalValueLocked
+  token0__totalValueLockedUSD
+  token0__totalValueLockedUSDUntracked
+  token0__derivedETH
+  token1
+  token1__id
+  token1__symbol
+  token1__name
+  token1__decimals
+  token1__totalSupply
+  token1__volume
+  token1__volumeUSD
+  token1__untrackedVolumeUSD
+  token1__feesUSD
+  token1__txCount
+  token1__poolCount
+  token1__totalValueLocked
+  token1__totalValueLockedUSD
+  token1__totalValueLockedUSDUntracked
+  token1__derivedETH
+  feeTier
+  liquidity
+  sqrtPrice
+  feeGrowthGlobal0X128
+  feeGrowthGlobal1X128
+  token0Price
+  token1Price
+  tick
+  observationIndex
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  untrackedVolumeUSD
+  feesUSD
+  txCount
+  collectedFeesToken0
+  collectedFeesToken1
+  collectedFeesUSD
+  totalValueLockedToken0
+  totalValueLockedToken1
+  totalValueLockedETH
+  totalValueLockedUSD
+  totalValueLockedUSDUntracked
+  liquidityProviderCount
+  poolHourData
+  poolDayData
+  mints
+  burns
+  swaps
+  collects
+  ticks
+}
+
+type uni_Position {
+  id: ID!
+  owner: uni_Bytes!
+  pool: uni_Pool!
+  token0: uni_Token!
+  token1: uni_Token!
+  tickLower: uni_Tick!
+  tickUpper: uni_Tick!
+  liquidity: BigInt!
+  depositedToken0: uni_BigDecimal!
+  depositedToken1: uni_BigDecimal!
+  withdrawnToken0: uni_BigDecimal!
+  withdrawnToken1: uni_BigDecimal!
+  collectedFeesToken0: uni_BigDecimal!
+  collectedFeesToken1: uni_BigDecimal!
+  transaction: uni_Transaction!
+  feeGrowthInside0LastX128: BigInt!
+  feeGrowthInside1LastX128: BigInt!
+}
+
+type uni_PositionSnapshot {
+  id: ID!
+  owner: uni_Bytes!
+  pool: uni_Pool!
+  position: uni_Position!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  liquidity: BigInt!
+  depositedToken0: uni_BigDecimal!
+  depositedToken1: uni_BigDecimal!
+  withdrawnToken0: uni_BigDecimal!
+  withdrawnToken1: uni_BigDecimal!
+  collectedFeesToken0: uni_BigDecimal!
+  collectedFeesToken1: uni_BigDecimal!
+  transaction: uni_Transaction!
+  feeGrowthInside0LastX128: BigInt!
+  feeGrowthInside1LastX128: BigInt!
+}
+
+input uni_PositionSnapshot_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  owner: uni_Bytes
+  owner_not: uni_Bytes
+  owner_gt: uni_Bytes
+  owner_lt: uni_Bytes
+  owner_gte: uni_Bytes
+  owner_lte: uni_Bytes
+  owner_in: [uni_Bytes!]
+  owner_not_in: [uni_Bytes!]
+  owner_contains: uni_Bytes
+  owner_not_contains: uni_Bytes
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  position: String
+  position_not: String
+  position_gt: String
+  position_lt: String
+  position_gte: String
+  position_lte: String
+  position_in: [String!]
+  position_not_in: [String!]
+  position_contains: String
+  position_contains_nocase: String
+  position_not_contains: String
+  position_not_contains_nocase: String
+  position_starts_with: String
+  position_starts_with_nocase: String
+  position_not_starts_with: String
+  position_not_starts_with_nocase: String
+  position_ends_with: String
+  position_ends_with_nocase: String
+  position_not_ends_with: String
+  position_not_ends_with_nocase: String
+  position_: uni_Position_filter
+  blockNumber: BigInt
+  blockNumber_not: BigInt
+  blockNumber_gt: BigInt
+  blockNumber_lt: BigInt
+  blockNumber_gte: BigInt
+  blockNumber_lte: BigInt
+  blockNumber_in: [BigInt!]
+  blockNumber_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  liquidity: BigInt
+  liquidity_not: BigInt
+  liquidity_gt: BigInt
+  liquidity_lt: BigInt
+  liquidity_gte: BigInt
+  liquidity_lte: BigInt
+  liquidity_in: [BigInt!]
+  liquidity_not_in: [BigInt!]
+  depositedToken0: uni_BigDecimal
+  depositedToken0_not: uni_BigDecimal
+  depositedToken0_gt: uni_BigDecimal
+  depositedToken0_lt: uni_BigDecimal
+  depositedToken0_gte: uni_BigDecimal
+  depositedToken0_lte: uni_BigDecimal
+  depositedToken0_in: [uni_BigDecimal!]
+  depositedToken0_not_in: [uni_BigDecimal!]
+  depositedToken1: uni_BigDecimal
+  depositedToken1_not: uni_BigDecimal
+  depositedToken1_gt: uni_BigDecimal
+  depositedToken1_lt: uni_BigDecimal
+  depositedToken1_gte: uni_BigDecimal
+  depositedToken1_lte: uni_BigDecimal
+  depositedToken1_in: [uni_BigDecimal!]
+  depositedToken1_not_in: [uni_BigDecimal!]
+  withdrawnToken0: uni_BigDecimal
+  withdrawnToken0_not: uni_BigDecimal
+  withdrawnToken0_gt: uni_BigDecimal
+  withdrawnToken0_lt: uni_BigDecimal
+  withdrawnToken0_gte: uni_BigDecimal
+  withdrawnToken0_lte: uni_BigDecimal
+  withdrawnToken0_in: [uni_BigDecimal!]
+  withdrawnToken0_not_in: [uni_BigDecimal!]
+  withdrawnToken1: uni_BigDecimal
+  withdrawnToken1_not: uni_BigDecimal
+  withdrawnToken1_gt: uni_BigDecimal
+  withdrawnToken1_lt: uni_BigDecimal
+  withdrawnToken1_gte: uni_BigDecimal
+  withdrawnToken1_lte: uni_BigDecimal
+  withdrawnToken1_in: [uni_BigDecimal!]
+  withdrawnToken1_not_in: [uni_BigDecimal!]
+  collectedFeesToken0: uni_BigDecimal
+  collectedFeesToken0_not: uni_BigDecimal
+  collectedFeesToken0_gt: uni_BigDecimal
+  collectedFeesToken0_lt: uni_BigDecimal
+  collectedFeesToken0_gte: uni_BigDecimal
+  collectedFeesToken0_lte: uni_BigDecimal
+  collectedFeesToken0_in: [uni_BigDecimal!]
+  collectedFeesToken0_not_in: [uni_BigDecimal!]
+  collectedFeesToken1: uni_BigDecimal
+  collectedFeesToken1_not: uni_BigDecimal
+  collectedFeesToken1_gt: uni_BigDecimal
+  collectedFeesToken1_lt: uni_BigDecimal
+  collectedFeesToken1_gte: uni_BigDecimal
+  collectedFeesToken1_lte: uni_BigDecimal
+  collectedFeesToken1_in: [uni_BigDecimal!]
+  collectedFeesToken1_not_in: [uni_BigDecimal!]
+  transaction: String
+  transaction_not: String
+  transaction_gt: String
+  transaction_lt: String
+  transaction_gte: String
+  transaction_lte: String
+  transaction_in: [String!]
+  transaction_not_in: [String!]
+  transaction_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains: String
+  transaction_not_contains_nocase: String
+  transaction_starts_with: String
+  transaction_starts_with_nocase: String
+  transaction_not_starts_with: String
+  transaction_not_starts_with_nocase: String
+  transaction_ends_with: String
+  transaction_ends_with_nocase: String
+  transaction_not_ends_with: String
+  transaction_not_ends_with_nocase: String
+  transaction_: uni_Transaction_filter
+  feeGrowthInside0LastX128: BigInt
+  feeGrowthInside0LastX128_not: BigInt
+  feeGrowthInside0LastX128_gt: BigInt
+  feeGrowthInside0LastX128_lt: BigInt
+  feeGrowthInside0LastX128_gte: BigInt
+  feeGrowthInside0LastX128_lte: BigInt
+  feeGrowthInside0LastX128_in: [BigInt!]
+  feeGrowthInside0LastX128_not_in: [BigInt!]
+  feeGrowthInside1LastX128: BigInt
+  feeGrowthInside1LastX128_not: BigInt
+  feeGrowthInside1LastX128_gt: BigInt
+  feeGrowthInside1LastX128_lt: BigInt
+  feeGrowthInside1LastX128_gte: BigInt
+  feeGrowthInside1LastX128_lte: BigInt
+  feeGrowthInside1LastX128_in: [BigInt!]
+  feeGrowthInside1LastX128_not_in: [BigInt!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_PositionSnapshot_filter]
+  or: [uni_PositionSnapshot_filter]
+}
+
+enum uni_PositionSnapshot_orderBy {
+  id
+  owner
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  position
+  position__id
+  position__owner
+  position__liquidity
+  position__depositedToken0
+  position__depositedToken1
+  position__withdrawnToken0
+  position__withdrawnToken1
+  position__collectedFeesToken0
+  position__collectedFeesToken1
+  position__feeGrowthInside0LastX128
+  position__feeGrowthInside1LastX128
+  blockNumber
+  timestamp
+  liquidity
+  depositedToken0
+  depositedToken1
+  withdrawnToken0
+  withdrawnToken1
+  collectedFeesToken0
+  collectedFeesToken1
+  transaction
+  transaction__id
+  transaction__blockNumber
+  transaction__timestamp
+  transaction__gasUsed
+  transaction__gasPrice
+  feeGrowthInside0LastX128
+  feeGrowthInside1LastX128
+}
+
+input uni_Position_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  owner: uni_Bytes
+  owner_not: uni_Bytes
+  owner_gt: uni_Bytes
+  owner_lt: uni_Bytes
+  owner_gte: uni_Bytes
+  owner_lte: uni_Bytes
+  owner_in: [uni_Bytes!]
+  owner_not_in: [uni_Bytes!]
+  owner_contains: uni_Bytes
+  owner_not_contains: uni_Bytes
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  token0: String
+  token0_not: String
+  token0_gt: String
+  token0_lt: String
+  token0_gte: String
+  token0_lte: String
+  token0_in: [String!]
+  token0_not_in: [String!]
+  token0_contains: String
+  token0_contains_nocase: String
+  token0_not_contains: String
+  token0_not_contains_nocase: String
+  token0_starts_with: String
+  token0_starts_with_nocase: String
+  token0_not_starts_with: String
+  token0_not_starts_with_nocase: String
+  token0_ends_with: String
+  token0_ends_with_nocase: String
+  token0_not_ends_with: String
+  token0_not_ends_with_nocase: String
+  token0_: uni_Token_filter
+  token1: String
+  token1_not: String
+  token1_gt: String
+  token1_lt: String
+  token1_gte: String
+  token1_lte: String
+  token1_in: [String!]
+  token1_not_in: [String!]
+  token1_contains: String
+  token1_contains_nocase: String
+  token1_not_contains: String
+  token1_not_contains_nocase: String
+  token1_starts_with: String
+  token1_starts_with_nocase: String
+  token1_not_starts_with: String
+  token1_not_starts_with_nocase: String
+  token1_ends_with: String
+  token1_ends_with_nocase: String
+  token1_not_ends_with: String
+  token1_not_ends_with_nocase: String
+  token1_: uni_Token_filter
+  tickLower: String
+  tickLower_not: String
+  tickLower_gt: String
+  tickLower_lt: String
+  tickLower_gte: String
+  tickLower_lte: String
+  tickLower_in: [String!]
+  tickLower_not_in: [String!]
+  tickLower_contains: String
+  tickLower_contains_nocase: String
+  tickLower_not_contains: String
+  tickLower_not_contains_nocase: String
+  tickLower_starts_with: String
+  tickLower_starts_with_nocase: String
+  tickLower_not_starts_with: String
+  tickLower_not_starts_with_nocase: String
+  tickLower_ends_with: String
+  tickLower_ends_with_nocase: String
+  tickLower_not_ends_with: String
+  tickLower_not_ends_with_nocase: String
+  tickLower_: uni_Tick_filter
+  tickUpper: String
+  tickUpper_not: String
+  tickUpper_gt: String
+  tickUpper_lt: String
+  tickUpper_gte: String
+  tickUpper_lte: String
+  tickUpper_in: [String!]
+  tickUpper_not_in: [String!]
+  tickUpper_contains: String
+  tickUpper_contains_nocase: String
+  tickUpper_not_contains: String
+  tickUpper_not_contains_nocase: String
+  tickUpper_starts_with: String
+  tickUpper_starts_with_nocase: String
+  tickUpper_not_starts_with: String
+  tickUpper_not_starts_with_nocase: String
+  tickUpper_ends_with: String
+  tickUpper_ends_with_nocase: String
+  tickUpper_not_ends_with: String
+  tickUpper_not_ends_with_nocase: String
+  tickUpper_: uni_Tick_filter
+  liquidity: BigInt
+  liquidity_not: BigInt
+  liquidity_gt: BigInt
+  liquidity_lt: BigInt
+  liquidity_gte: BigInt
+  liquidity_lte: BigInt
+  liquidity_in: [BigInt!]
+  liquidity_not_in: [BigInt!]
+  depositedToken0: uni_BigDecimal
+  depositedToken0_not: uni_BigDecimal
+  depositedToken0_gt: uni_BigDecimal
+  depositedToken0_lt: uni_BigDecimal
+  depositedToken0_gte: uni_BigDecimal
+  depositedToken0_lte: uni_BigDecimal
+  depositedToken0_in: [uni_BigDecimal!]
+  depositedToken0_not_in: [uni_BigDecimal!]
+  depositedToken1: uni_BigDecimal
+  depositedToken1_not: uni_BigDecimal
+  depositedToken1_gt: uni_BigDecimal
+  depositedToken1_lt: uni_BigDecimal
+  depositedToken1_gte: uni_BigDecimal
+  depositedToken1_lte: uni_BigDecimal
+  depositedToken1_in: [uni_BigDecimal!]
+  depositedToken1_not_in: [uni_BigDecimal!]
+  withdrawnToken0: uni_BigDecimal
+  withdrawnToken0_not: uni_BigDecimal
+  withdrawnToken0_gt: uni_BigDecimal
+  withdrawnToken0_lt: uni_BigDecimal
+  withdrawnToken0_gte: uni_BigDecimal
+  withdrawnToken0_lte: uni_BigDecimal
+  withdrawnToken0_in: [uni_BigDecimal!]
+  withdrawnToken0_not_in: [uni_BigDecimal!]
+  withdrawnToken1: uni_BigDecimal
+  withdrawnToken1_not: uni_BigDecimal
+  withdrawnToken1_gt: uni_BigDecimal
+  withdrawnToken1_lt: uni_BigDecimal
+  withdrawnToken1_gte: uni_BigDecimal
+  withdrawnToken1_lte: uni_BigDecimal
+  withdrawnToken1_in: [uni_BigDecimal!]
+  withdrawnToken1_not_in: [uni_BigDecimal!]
+  collectedFeesToken0: uni_BigDecimal
+  collectedFeesToken0_not: uni_BigDecimal
+  collectedFeesToken0_gt: uni_BigDecimal
+  collectedFeesToken0_lt: uni_BigDecimal
+  collectedFeesToken0_gte: uni_BigDecimal
+  collectedFeesToken0_lte: uni_BigDecimal
+  collectedFeesToken0_in: [uni_BigDecimal!]
+  collectedFeesToken0_not_in: [uni_BigDecimal!]
+  collectedFeesToken1: uni_BigDecimal
+  collectedFeesToken1_not: uni_BigDecimal
+  collectedFeesToken1_gt: uni_BigDecimal
+  collectedFeesToken1_lt: uni_BigDecimal
+  collectedFeesToken1_gte: uni_BigDecimal
+  collectedFeesToken1_lte: uni_BigDecimal
+  collectedFeesToken1_in: [uni_BigDecimal!]
+  collectedFeesToken1_not_in: [uni_BigDecimal!]
+  transaction: String
+  transaction_not: String
+  transaction_gt: String
+  transaction_lt: String
+  transaction_gte: String
+  transaction_lte: String
+  transaction_in: [String!]
+  transaction_not_in: [String!]
+  transaction_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains: String
+  transaction_not_contains_nocase: String
+  transaction_starts_with: String
+  transaction_starts_with_nocase: String
+  transaction_not_starts_with: String
+  transaction_not_starts_with_nocase: String
+  transaction_ends_with: String
+  transaction_ends_with_nocase: String
+  transaction_not_ends_with: String
+  transaction_not_ends_with_nocase: String
+  transaction_: uni_Transaction_filter
+  feeGrowthInside0LastX128: BigInt
+  feeGrowthInside0LastX128_not: BigInt
+  feeGrowthInside0LastX128_gt: BigInt
+  feeGrowthInside0LastX128_lt: BigInt
+  feeGrowthInside0LastX128_gte: BigInt
+  feeGrowthInside0LastX128_lte: BigInt
+  feeGrowthInside0LastX128_in: [BigInt!]
+  feeGrowthInside0LastX128_not_in: [BigInt!]
+  feeGrowthInside1LastX128: BigInt
+  feeGrowthInside1LastX128_not: BigInt
+  feeGrowthInside1LastX128_gt: BigInt
+  feeGrowthInside1LastX128_lt: BigInt
+  feeGrowthInside1LastX128_gte: BigInt
+  feeGrowthInside1LastX128_lte: BigInt
+  feeGrowthInside1LastX128_in: [BigInt!]
+  feeGrowthInside1LastX128_not_in: [BigInt!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Position_filter]
+  or: [uni_Position_filter]
+}
+
+enum uni_Position_orderBy {
+  id
+  owner
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  token0
+  token0__id
+  token0__symbol
+  token0__name
+  token0__decimals
+  token0__totalSupply
+  token0__volume
+  token0__volumeUSD
+  token0__untrackedVolumeUSD
+  token0__feesUSD
+  token0__txCount
+  token0__poolCount
+  token0__totalValueLocked
+  token0__totalValueLockedUSD
+  token0__totalValueLockedUSDUntracked
+  token0__derivedETH
+  token1
+  token1__id
+  token1__symbol
+  token1__name
+  token1__decimals
+  token1__totalSupply
+  token1__volume
+  token1__volumeUSD
+  token1__untrackedVolumeUSD
+  token1__feesUSD
+  token1__txCount
+  token1__poolCount
+  token1__totalValueLocked
+  token1__totalValueLockedUSD
+  token1__totalValueLockedUSDUntracked
+  token1__derivedETH
+  tickLower
+  tickLower__id
+  tickLower__poolAddress
+  tickLower__tickIdx
+  tickLower__liquidityGross
+  tickLower__liquidityNet
+  tickLower__price0
+  tickLower__price1
+  tickLower__volumeToken0
+  tickLower__volumeToken1
+  tickLower__volumeUSD
+  tickLower__untrackedVolumeUSD
+  tickLower__feesUSD
+  tickLower__collectedFeesToken0
+  tickLower__collectedFeesToken1
+  tickLower__collectedFeesUSD
+  tickLower__createdAtTimestamp
+  tickLower__createdAtBlockNumber
+  tickLower__liquidityProviderCount
+  tickLower__feeGrowthOutside0X128
+  tickLower__feeGrowthOutside1X128
+  tickUpper
+  tickUpper__id
+  tickUpper__poolAddress
+  tickUpper__tickIdx
+  tickUpper__liquidityGross
+  tickUpper__liquidityNet
+  tickUpper__price0
+  tickUpper__price1
+  tickUpper__volumeToken0
+  tickUpper__volumeToken1
+  tickUpper__volumeUSD
+  tickUpper__untrackedVolumeUSD
+  tickUpper__feesUSD
+  tickUpper__collectedFeesToken0
+  tickUpper__collectedFeesToken1
+  tickUpper__collectedFeesUSD
+  tickUpper__createdAtTimestamp
+  tickUpper__createdAtBlockNumber
+  tickUpper__liquidityProviderCount
+  tickUpper__feeGrowthOutside0X128
+  tickUpper__feeGrowthOutside1X128
+  liquidity
+  depositedToken0
+  depositedToken1
+  withdrawnToken0
+  withdrawnToken1
+  collectedFeesToken0
+  collectedFeesToken1
+  transaction
+  transaction__id
+  transaction__blockNumber
+  transaction__timestamp
+  transaction__gasUsed
+  transaction__gasPrice
+  feeGrowthInside0LastX128
+  feeGrowthInside1LastX128
+}
+
+type Query {
+  uni_factory(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Factory
+  uni_factories(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Factory_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Factory_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Factory!]!
+  uni_bundle(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Bundle
+  uni_bundles(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Bundle_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Bundle_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Bundle!]!
+  uni_token(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Token
+  uni_tokens(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Token_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Token_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Token!]!
+  uni_pool(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Pool
+  uni_pools(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Pool_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Pool_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Pool!]!
+  uni_tick(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Tick
+  uni_ticks(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Tick_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Tick_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Tick!]!
+  uni_position(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Position
+  uni_positions(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Position_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Position_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Position!]!
+  uni_positionSnapshot(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_PositionSnapshot
+  uni_positionSnapshots(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_PositionSnapshot_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_PositionSnapshot_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_PositionSnapshot!]!
+  uni_transaction(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Transaction
+  uni_transactions(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Transaction_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Transaction_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Transaction!]!
+  uni_mint(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Mint
+  uni_mints(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Mint_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Mint_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Mint!]!
+  uni_burn(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Burn
+  uni_burns(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Burn_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Burn_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Burn!]!
+  uni_swap(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Swap
+  uni_swaps(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Swap_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Swap_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Swap!]!
+  uni_collect(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Collect
+  uni_collects(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Collect_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Collect_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Collect!]!
+  uni_flash(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Flash
+  uni_flashes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Flash_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Flash_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Flash!]!
+  uni_uniswapDayData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_UniswapDayData
+  uni_uniswapDayDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_UniswapDayData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_UniswapDayData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_UniswapDayData!]!
+  uni_poolDayData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_PoolDayData
+  uni_poolDayDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_PoolDayData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_PoolDayData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_PoolDayData!]!
+  uni_poolHourData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_PoolHourData
+  uni_poolHourDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_PoolHourData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_PoolHourData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_PoolHourData!]!
+  uni_tickHourData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_TickHourData
+  uni_tickHourDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_TickHourData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_TickHourData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_TickHourData!]!
+  uni_tickDayData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_TickDayData
+  uni_tickDayDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_TickDayData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_TickDayData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_TickDayData!]!
+  uni_tokenDayData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_TokenDayData
+  uni_tokenDayDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_TokenDayData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_TokenDayData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_TokenDayData!]!
+  uni_tokenHourData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_TokenHourData
+  uni_tokenHourDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_TokenHourData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_TokenHourData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_TokenHourData!]!
+  """Access to subgraph metadata"""
+  uni__meta(block: uni_Block_height): uni__Meta_
+}
+
+type Subscription {
+  uni_factory(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Factory
+  uni_factories(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Factory_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Factory_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Factory!]!
+  uni_bundle(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Bundle
+  uni_bundles(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Bundle_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Bundle_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Bundle!]!
+  uni_token(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Token
+  uni_tokens(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Token_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Token_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Token!]!
+  uni_pool(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Pool
+  uni_pools(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Pool_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Pool_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Pool!]!
+  uni_tick(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Tick
+  uni_ticks(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Tick_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Tick_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Tick!]!
+  uni_position(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Position
+  uni_positions(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Position_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Position_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Position!]!
+  uni_positionSnapshot(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_PositionSnapshot
+  uni_positionSnapshots(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_PositionSnapshot_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_PositionSnapshot_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_PositionSnapshot!]!
+  uni_transaction(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Transaction
+  uni_transactions(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Transaction_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Transaction_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Transaction!]!
+  uni_mint(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Mint
+  uni_mints(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Mint_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Mint_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Mint!]!
+  uni_burn(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Burn
+  uni_burns(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Burn_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Burn_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Burn!]!
+  uni_swap(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Swap
+  uni_swaps(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Swap_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Swap_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Swap!]!
+  uni_collect(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Collect
+  uni_collects(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Collect_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Collect_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Collect!]!
+  uni_flash(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_Flash
+  uni_flashes(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_Flash_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_Flash_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_Flash!]!
+  uni_uniswapDayData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_UniswapDayData
+  uni_uniswapDayDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_UniswapDayData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_UniswapDayData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_UniswapDayData!]!
+  uni_poolDayData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_PoolDayData
+  uni_poolDayDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_PoolDayData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_PoolDayData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_PoolDayData!]!
+  uni_poolHourData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_PoolHourData
+  uni_poolHourDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_PoolHourData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_PoolHourData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_PoolHourData!]!
+  uni_tickHourData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_TickHourData
+  uni_tickHourDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_TickHourData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_TickHourData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_TickHourData!]!
+  uni_tickDayData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_TickDayData
+  uni_tickDayDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_TickDayData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_TickDayData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_TickDayData!]!
+  uni_tokenDayData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_TokenDayData
+  uni_tokenDayDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_TokenDayData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_TokenDayData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_TokenDayData!]!
+  uni_tokenHourData(
+    id: ID!
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): uni_TokenHourData
+  uni_tokenHourDatas(
+    skip: Int = 0
+    first: Int = 100
+    orderBy: uni_TokenHourData_orderBy
+    orderDirection: uni_OrderDirection
+    where: uni_TokenHourData_filter
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: uni_Block_height
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: uni__SubgraphErrorPolicy_! = deny
+  ): [uni_TokenHourData!]!
+  """Access to subgraph metadata"""
+  uni__meta(block: uni_Block_height): uni__Meta_
+}
+
+type uni_Swap {
+  id: ID!
+  transaction: uni_Transaction!
+  timestamp: BigInt!
+  pool: uni_Pool!
+  token0: uni_Token!
+  token1: uni_Token!
+  sender: uni_Bytes!
+  recipient: uni_Bytes!
+  origin: uni_Bytes!
+  amount0: uni_BigDecimal!
+  amount1: uni_BigDecimal!
+  amountUSD: uni_BigDecimal!
+  sqrtPriceX96: BigInt!
+  tick: BigInt!
+  logIndex: BigInt
+}
+
+input uni_Swap_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  transaction: String
+  transaction_not: String
+  transaction_gt: String
+  transaction_lt: String
+  transaction_gte: String
+  transaction_lte: String
+  transaction_in: [String!]
+  transaction_not_in: [String!]
+  transaction_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains: String
+  transaction_not_contains_nocase: String
+  transaction_starts_with: String
+  transaction_starts_with_nocase: String
+  transaction_not_starts_with: String
+  transaction_not_starts_with_nocase: String
+  transaction_ends_with: String
+  transaction_ends_with_nocase: String
+  transaction_not_ends_with: String
+  transaction_not_ends_with_nocase: String
+  transaction_: uni_Transaction_filter
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  token0: String
+  token0_not: String
+  token0_gt: String
+  token0_lt: String
+  token0_gte: String
+  token0_lte: String
+  token0_in: [String!]
+  token0_not_in: [String!]
+  token0_contains: String
+  token0_contains_nocase: String
+  token0_not_contains: String
+  token0_not_contains_nocase: String
+  token0_starts_with: String
+  token0_starts_with_nocase: String
+  token0_not_starts_with: String
+  token0_not_starts_with_nocase: String
+  token0_ends_with: String
+  token0_ends_with_nocase: String
+  token0_not_ends_with: String
+  token0_not_ends_with_nocase: String
+  token0_: uni_Token_filter
+  token1: String
+  token1_not: String
+  token1_gt: String
+  token1_lt: String
+  token1_gte: String
+  token1_lte: String
+  token1_in: [String!]
+  token1_not_in: [String!]
+  token1_contains: String
+  token1_contains_nocase: String
+  token1_not_contains: String
+  token1_not_contains_nocase: String
+  token1_starts_with: String
+  token1_starts_with_nocase: String
+  token1_not_starts_with: String
+  token1_not_starts_with_nocase: String
+  token1_ends_with: String
+  token1_ends_with_nocase: String
+  token1_not_ends_with: String
+  token1_not_ends_with_nocase: String
+  token1_: uni_Token_filter
+  sender: uni_Bytes
+  sender_not: uni_Bytes
+  sender_gt: uni_Bytes
+  sender_lt: uni_Bytes
+  sender_gte: uni_Bytes
+  sender_lte: uni_Bytes
+  sender_in: [uni_Bytes!]
+  sender_not_in: [uni_Bytes!]
+  sender_contains: uni_Bytes
+  sender_not_contains: uni_Bytes
+  recipient: uni_Bytes
+  recipient_not: uni_Bytes
+  recipient_gt: uni_Bytes
+  recipient_lt: uni_Bytes
+  recipient_gte: uni_Bytes
+  recipient_lte: uni_Bytes
+  recipient_in: [uni_Bytes!]
+  recipient_not_in: [uni_Bytes!]
+  recipient_contains: uni_Bytes
+  recipient_not_contains: uni_Bytes
+  origin: uni_Bytes
+  origin_not: uni_Bytes
+  origin_gt: uni_Bytes
+  origin_lt: uni_Bytes
+  origin_gte: uni_Bytes
+  origin_lte: uni_Bytes
+  origin_in: [uni_Bytes!]
+  origin_not_in: [uni_Bytes!]
+  origin_contains: uni_Bytes
+  origin_not_contains: uni_Bytes
+  amount0: uni_BigDecimal
+  amount0_not: uni_BigDecimal
+  amount0_gt: uni_BigDecimal
+  amount0_lt: uni_BigDecimal
+  amount0_gte: uni_BigDecimal
+  amount0_lte: uni_BigDecimal
+  amount0_in: [uni_BigDecimal!]
+  amount0_not_in: [uni_BigDecimal!]
+  amount1: uni_BigDecimal
+  amount1_not: uni_BigDecimal
+  amount1_gt: uni_BigDecimal
+  amount1_lt: uni_BigDecimal
+  amount1_gte: uni_BigDecimal
+  amount1_lte: uni_BigDecimal
+  amount1_in: [uni_BigDecimal!]
+  amount1_not_in: [uni_BigDecimal!]
+  amountUSD: uni_BigDecimal
+  amountUSD_not: uni_BigDecimal
+  amountUSD_gt: uni_BigDecimal
+  amountUSD_lt: uni_BigDecimal
+  amountUSD_gte: uni_BigDecimal
+  amountUSD_lte: uni_BigDecimal
+  amountUSD_in: [uni_BigDecimal!]
+  amountUSD_not_in: [uni_BigDecimal!]
+  sqrtPriceX96: BigInt
+  sqrtPriceX96_not: BigInt
+  sqrtPriceX96_gt: BigInt
+  sqrtPriceX96_lt: BigInt
+  sqrtPriceX96_gte: BigInt
+  sqrtPriceX96_lte: BigInt
+  sqrtPriceX96_in: [BigInt!]
+  sqrtPriceX96_not_in: [BigInt!]
+  tick: BigInt
+  tick_not: BigInt
+  tick_gt: BigInt
+  tick_lt: BigInt
+  tick_gte: BigInt
+  tick_lte: BigInt
+  tick_in: [BigInt!]
+  tick_not_in: [BigInt!]
+  logIndex: BigInt
+  logIndex_not: BigInt
+  logIndex_gt: BigInt
+  logIndex_lt: BigInt
+  logIndex_gte: BigInt
+  logIndex_lte: BigInt
+  logIndex_in: [BigInt!]
+  logIndex_not_in: [BigInt!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Swap_filter]
+  or: [uni_Swap_filter]
+}
+
+enum uni_Swap_orderBy {
+  id
+  transaction
+  transaction__id
+  transaction__blockNumber
+  transaction__timestamp
+  transaction__gasUsed
+  transaction__gasPrice
+  timestamp
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  token0
+  token0__id
+  token0__symbol
+  token0__name
+  token0__decimals
+  token0__totalSupply
+  token0__volume
+  token0__volumeUSD
+  token0__untrackedVolumeUSD
+  token0__feesUSD
+  token0__txCount
+  token0__poolCount
+  token0__totalValueLocked
+  token0__totalValueLockedUSD
+  token0__totalValueLockedUSDUntracked
+  token0__derivedETH
+  token1
+  token1__id
+  token1__symbol
+  token1__name
+  token1__decimals
+  token1__totalSupply
+  token1__volume
+  token1__volumeUSD
+  token1__untrackedVolumeUSD
+  token1__feesUSD
+  token1__txCount
+  token1__poolCount
+  token1__totalValueLocked
+  token1__totalValueLockedUSD
+  token1__totalValueLockedUSDUntracked
+  token1__derivedETH
+  sender
+  recipient
+  origin
+  amount0
+  amount1
+  amountUSD
+  sqrtPriceX96
+  tick
+  logIndex
+}
+
+type uni_Tick {
+  id: ID!
+  poolAddress: String
+  tickIdx: BigInt!
+  pool: uni_Pool!
+  liquidityGross: BigInt!
+  liquidityNet: BigInt!
+  price0: uni_BigDecimal!
+  price1: uni_BigDecimal!
+  volumeToken0: uni_BigDecimal!
+  volumeToken1: uni_BigDecimal!
+  volumeUSD: uni_BigDecimal!
+  untrackedVolumeUSD: uni_BigDecimal!
+  feesUSD: uni_BigDecimal!
+  collectedFeesToken0: uni_BigDecimal!
+  collectedFeesToken1: uni_BigDecimal!
+  collectedFeesUSD: uni_BigDecimal!
+  createdAtTimestamp: BigInt!
+  createdAtBlockNumber: BigInt!
+  liquidityProviderCount: BigInt!
+  feeGrowthOutside0X128: BigInt!
+  feeGrowthOutside1X128: BigInt!
+}
+
+type uni_TickDayData {
+  id: ID!
+  date: Int!
+  pool: uni_Pool!
+  tick: uni_Tick!
+  liquidityGross: BigInt!
+  liquidityNet: BigInt!
+  volumeToken0: uni_BigDecimal!
+  volumeToken1: uni_BigDecimal!
+  volumeUSD: uni_BigDecimal!
+  feesUSD: uni_BigDecimal!
+  feeGrowthOutside0X128: BigInt!
+  feeGrowthOutside1X128: BigInt!
+}
+
+input uni_TickDayData_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  date: Int
+  date_not: Int
+  date_gt: Int
+  date_lt: Int
+  date_gte: Int
+  date_lte: Int
+  date_in: [Int!]
+  date_not_in: [Int!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  tick: String
+  tick_not: String
+  tick_gt: String
+  tick_lt: String
+  tick_gte: String
+  tick_lte: String
+  tick_in: [String!]
+  tick_not_in: [String!]
+  tick_contains: String
+  tick_contains_nocase: String
+  tick_not_contains: String
+  tick_not_contains_nocase: String
+  tick_starts_with: String
+  tick_starts_with_nocase: String
+  tick_not_starts_with: String
+  tick_not_starts_with_nocase: String
+  tick_ends_with: String
+  tick_ends_with_nocase: String
+  tick_not_ends_with: String
+  tick_not_ends_with_nocase: String
+  tick_: uni_Tick_filter
+  liquidityGross: BigInt
+  liquidityGross_not: BigInt
+  liquidityGross_gt: BigInt
+  liquidityGross_lt: BigInt
+  liquidityGross_gte: BigInt
+  liquidityGross_lte: BigInt
+  liquidityGross_in: [BigInt!]
+  liquidityGross_not_in: [BigInt!]
+  liquidityNet: BigInt
+  liquidityNet_not: BigInt
+  liquidityNet_gt: BigInt
+  liquidityNet_lt: BigInt
+  liquidityNet_gte: BigInt
+  liquidityNet_lte: BigInt
+  liquidityNet_in: [BigInt!]
+  liquidityNet_not_in: [BigInt!]
+  volumeToken0: uni_BigDecimal
+  volumeToken0_not: uni_BigDecimal
+  volumeToken0_gt: uni_BigDecimal
+  volumeToken0_lt: uni_BigDecimal
+  volumeToken0_gte: uni_BigDecimal
+  volumeToken0_lte: uni_BigDecimal
+  volumeToken0_in: [uni_BigDecimal!]
+  volumeToken0_not_in: [uni_BigDecimal!]
+  volumeToken1: uni_BigDecimal
+  volumeToken1_not: uni_BigDecimal
+  volumeToken1_gt: uni_BigDecimal
+  volumeToken1_lt: uni_BigDecimal
+  volumeToken1_gte: uni_BigDecimal
+  volumeToken1_lte: uni_BigDecimal
+  volumeToken1_in: [uni_BigDecimal!]
+  volumeToken1_not_in: [uni_BigDecimal!]
+  volumeUSD: uni_BigDecimal
+  volumeUSD_not: uni_BigDecimal
+  volumeUSD_gt: uni_BigDecimal
+  volumeUSD_lt: uni_BigDecimal
+  volumeUSD_gte: uni_BigDecimal
+  volumeUSD_lte: uni_BigDecimal
+  volumeUSD_in: [uni_BigDecimal!]
+  volumeUSD_not_in: [uni_BigDecimal!]
+  feesUSD: uni_BigDecimal
+  feesUSD_not: uni_BigDecimal
+  feesUSD_gt: uni_BigDecimal
+  feesUSD_lt: uni_BigDecimal
+  feesUSD_gte: uni_BigDecimal
+  feesUSD_lte: uni_BigDecimal
+  feesUSD_in: [uni_BigDecimal!]
+  feesUSD_not_in: [uni_BigDecimal!]
+  feeGrowthOutside0X128: BigInt
+  feeGrowthOutside0X128_not: BigInt
+  feeGrowthOutside0X128_gt: BigInt
+  feeGrowthOutside0X128_lt: BigInt
+  feeGrowthOutside0X128_gte: BigInt
+  feeGrowthOutside0X128_lte: BigInt
+  feeGrowthOutside0X128_in: [BigInt!]
+  feeGrowthOutside0X128_not_in: [BigInt!]
+  feeGrowthOutside1X128: BigInt
+  feeGrowthOutside1X128_not: BigInt
+  feeGrowthOutside1X128_gt: BigInt
+  feeGrowthOutside1X128_lt: BigInt
+  feeGrowthOutside1X128_gte: BigInt
+  feeGrowthOutside1X128_lte: BigInt
+  feeGrowthOutside1X128_in: [BigInt!]
+  feeGrowthOutside1X128_not_in: [BigInt!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_TickDayData_filter]
+  or: [uni_TickDayData_filter]
+}
+
+enum uni_TickDayData_orderBy {
+  id
+  date
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  tick
+  tick__id
+  tick__poolAddress
+  tick__tickIdx
+  tick__liquidityGross
+  tick__liquidityNet
+  tick__price0
+  tick__price1
+  tick__volumeToken0
+  tick__volumeToken1
+  tick__volumeUSD
+  tick__untrackedVolumeUSD
+  tick__feesUSD
+  tick__collectedFeesToken0
+  tick__collectedFeesToken1
+  tick__collectedFeesUSD
+  tick__createdAtTimestamp
+  tick__createdAtBlockNumber
+  tick__liquidityProviderCount
+  tick__feeGrowthOutside0X128
+  tick__feeGrowthOutside1X128
+  liquidityGross
+  liquidityNet
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  feesUSD
+  feeGrowthOutside0X128
+  feeGrowthOutside1X128
+}
+
+type uni_TickHourData {
+  id: ID!
+  periodStartUnix: Int!
+  pool: uni_Pool!
+  tick: uni_Tick!
+  liquidityGross: BigInt!
+  liquidityNet: BigInt!
+  volumeToken0: uni_BigDecimal!
+  volumeToken1: uni_BigDecimal!
+  volumeUSD: uni_BigDecimal!
+  feesUSD: uni_BigDecimal!
+}
+
+input uni_TickHourData_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  periodStartUnix: Int
+  periodStartUnix_not: Int
+  periodStartUnix_gt: Int
+  periodStartUnix_lt: Int
+  periodStartUnix_gte: Int
+  periodStartUnix_lte: Int
+  periodStartUnix_in: [Int!]
+  periodStartUnix_not_in: [Int!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  tick: String
+  tick_not: String
+  tick_gt: String
+  tick_lt: String
+  tick_gte: String
+  tick_lte: String
+  tick_in: [String!]
+  tick_not_in: [String!]
+  tick_contains: String
+  tick_contains_nocase: String
+  tick_not_contains: String
+  tick_not_contains_nocase: String
+  tick_starts_with: String
+  tick_starts_with_nocase: String
+  tick_not_starts_with: String
+  tick_not_starts_with_nocase: String
+  tick_ends_with: String
+  tick_ends_with_nocase: String
+  tick_not_ends_with: String
+  tick_not_ends_with_nocase: String
+  tick_: uni_Tick_filter
+  liquidityGross: BigInt
+  liquidityGross_not: BigInt
+  liquidityGross_gt: BigInt
+  liquidityGross_lt: BigInt
+  liquidityGross_gte: BigInt
+  liquidityGross_lte: BigInt
+  liquidityGross_in: [BigInt!]
+  liquidityGross_not_in: [BigInt!]
+  liquidityNet: BigInt
+  liquidityNet_not: BigInt
+  liquidityNet_gt: BigInt
+  liquidityNet_lt: BigInt
+  liquidityNet_gte: BigInt
+  liquidityNet_lte: BigInt
+  liquidityNet_in: [BigInt!]
+  liquidityNet_not_in: [BigInt!]
+  volumeToken0: uni_BigDecimal
+  volumeToken0_not: uni_BigDecimal
+  volumeToken0_gt: uni_BigDecimal
+  volumeToken0_lt: uni_BigDecimal
+  volumeToken0_gte: uni_BigDecimal
+  volumeToken0_lte: uni_BigDecimal
+  volumeToken0_in: [uni_BigDecimal!]
+  volumeToken0_not_in: [uni_BigDecimal!]
+  volumeToken1: uni_BigDecimal
+  volumeToken1_not: uni_BigDecimal
+  volumeToken1_gt: uni_BigDecimal
+  volumeToken1_lt: uni_BigDecimal
+  volumeToken1_gte: uni_BigDecimal
+  volumeToken1_lte: uni_BigDecimal
+  volumeToken1_in: [uni_BigDecimal!]
+  volumeToken1_not_in: [uni_BigDecimal!]
+  volumeUSD: uni_BigDecimal
+  volumeUSD_not: uni_BigDecimal
+  volumeUSD_gt: uni_BigDecimal
+  volumeUSD_lt: uni_BigDecimal
+  volumeUSD_gte: uni_BigDecimal
+  volumeUSD_lte: uni_BigDecimal
+  volumeUSD_in: [uni_BigDecimal!]
+  volumeUSD_not_in: [uni_BigDecimal!]
+  feesUSD: uni_BigDecimal
+  feesUSD_not: uni_BigDecimal
+  feesUSD_gt: uni_BigDecimal
+  feesUSD_lt: uni_BigDecimal
+  feesUSD_gte: uni_BigDecimal
+  feesUSD_lte: uni_BigDecimal
+  feesUSD_in: [uni_BigDecimal!]
+  feesUSD_not_in: [uni_BigDecimal!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_TickHourData_filter]
+  or: [uni_TickHourData_filter]
+}
+
+enum uni_TickHourData_orderBy {
+  id
+  periodStartUnix
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  tick
+  tick__id
+  tick__poolAddress
+  tick__tickIdx
+  tick__liquidityGross
+  tick__liquidityNet
+  tick__price0
+  tick__price1
+  tick__volumeToken0
+  tick__volumeToken1
+  tick__volumeUSD
+  tick__untrackedVolumeUSD
+  tick__feesUSD
+  tick__collectedFeesToken0
+  tick__collectedFeesToken1
+  tick__collectedFeesUSD
+  tick__createdAtTimestamp
+  tick__createdAtBlockNumber
+  tick__liquidityProviderCount
+  tick__feeGrowthOutside0X128
+  tick__feeGrowthOutside1X128
+  liquidityGross
+  liquidityNet
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  feesUSD
+}
+
+input uni_Tick_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  poolAddress: String
+  poolAddress_not: String
+  poolAddress_gt: String
+  poolAddress_lt: String
+  poolAddress_gte: String
+  poolAddress_lte: String
+  poolAddress_in: [String!]
+  poolAddress_not_in: [String!]
+  poolAddress_contains: String
+  poolAddress_contains_nocase: String
+  poolAddress_not_contains: String
+  poolAddress_not_contains_nocase: String
+  poolAddress_starts_with: String
+  poolAddress_starts_with_nocase: String
+  poolAddress_not_starts_with: String
+  poolAddress_not_starts_with_nocase: String
+  poolAddress_ends_with: String
+  poolAddress_ends_with_nocase: String
+  poolAddress_not_ends_with: String
+  poolAddress_not_ends_with_nocase: String
+  tickIdx: BigInt
+  tickIdx_not: BigInt
+  tickIdx_gt: BigInt
+  tickIdx_lt: BigInt
+  tickIdx_gte: BigInt
+  tickIdx_lte: BigInt
+  tickIdx_in: [BigInt!]
+  tickIdx_not_in: [BigInt!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_contains: String
+  pool_contains_nocase: String
+  pool_not_contains: String
+  pool_not_contains_nocase: String
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_: uni_Pool_filter
+  liquidityGross: BigInt
+  liquidityGross_not: BigInt
+  liquidityGross_gt: BigInt
+  liquidityGross_lt: BigInt
+  liquidityGross_gte: BigInt
+  liquidityGross_lte: BigInt
+  liquidityGross_in: [BigInt!]
+  liquidityGross_not_in: [BigInt!]
+  liquidityNet: BigInt
+  liquidityNet_not: BigInt
+  liquidityNet_gt: BigInt
+  liquidityNet_lt: BigInt
+  liquidityNet_gte: BigInt
+  liquidityNet_lte: BigInt
+  liquidityNet_in: [BigInt!]
+  liquidityNet_not_in: [BigInt!]
+  price0: uni_BigDecimal
+  price0_not: uni_BigDecimal
+  price0_gt: uni_BigDecimal
+  price0_lt: uni_BigDecimal
+  price0_gte: uni_BigDecimal
+  price0_lte: uni_BigDecimal
+  price0_in: [uni_BigDecimal!]
+  price0_not_in: [uni_BigDecimal!]
+  price1: uni_BigDecimal
+  price1_not: uni_BigDecimal
+  price1_gt: uni_BigDecimal
+  price1_lt: uni_BigDecimal
+  price1_gte: uni_BigDecimal
+  price1_lte: uni_BigDecimal
+  price1_in: [uni_BigDecimal!]
+  price1_not_in: [uni_BigDecimal!]
+  volumeToken0: uni_BigDecimal
+  volumeToken0_not: uni_BigDecimal
+  volumeToken0_gt: uni_BigDecimal
+  volumeToken0_lt: uni_BigDecimal
+  volumeToken0_gte: uni_BigDecimal
+  volumeToken0_lte: uni_BigDecimal
+  volumeToken0_in: [uni_BigDecimal!]
+  volumeToken0_not_in: [uni_BigDecimal!]
+  volumeToken1: uni_BigDecimal
+  volumeToken1_not: uni_BigDecimal
+  volumeToken1_gt: uni_BigDecimal
+  volumeToken1_lt: uni_BigDecimal
+  volumeToken1_gte: uni_BigDecimal
+  volumeToken1_lte: uni_BigDecimal
+  volumeToken1_in: [uni_BigDecimal!]
+  volumeToken1_not_in: [uni_BigDecimal!]
+  volumeUSD: uni_BigDecimal
+  volumeUSD_not: uni_BigDecimal
+  volumeUSD_gt: uni_BigDecimal
+  volumeUSD_lt: uni_BigDecimal
+  volumeUSD_gte: uni_BigDecimal
+  volumeUSD_lte: uni_BigDecimal
+  volumeUSD_in: [uni_BigDecimal!]
+  volumeUSD_not_in: [uni_BigDecimal!]
+  untrackedVolumeUSD: uni_BigDecimal
+  untrackedVolumeUSD_not: uni_BigDecimal
+  untrackedVolumeUSD_gt: uni_BigDecimal
+  untrackedVolumeUSD_lt: uni_BigDecimal
+  untrackedVolumeUSD_gte: uni_BigDecimal
+  untrackedVolumeUSD_lte: uni_BigDecimal
+  untrackedVolumeUSD_in: [uni_BigDecimal!]
+  untrackedVolumeUSD_not_in: [uni_BigDecimal!]
+  feesUSD: uni_BigDecimal
+  feesUSD_not: uni_BigDecimal
+  feesUSD_gt: uni_BigDecimal
+  feesUSD_lt: uni_BigDecimal
+  feesUSD_gte: uni_BigDecimal
+  feesUSD_lte: uni_BigDecimal
+  feesUSD_in: [uni_BigDecimal!]
+  feesUSD_not_in: [uni_BigDecimal!]
+  collectedFeesToken0: uni_BigDecimal
+  collectedFeesToken0_not: uni_BigDecimal
+  collectedFeesToken0_gt: uni_BigDecimal
+  collectedFeesToken0_lt: uni_BigDecimal
+  collectedFeesToken0_gte: uni_BigDecimal
+  collectedFeesToken0_lte: uni_BigDecimal
+  collectedFeesToken0_in: [uni_BigDecimal!]
+  collectedFeesToken0_not_in: [uni_BigDecimal!]
+  collectedFeesToken1: uni_BigDecimal
+  collectedFeesToken1_not: uni_BigDecimal
+  collectedFeesToken1_gt: uni_BigDecimal
+  collectedFeesToken1_lt: uni_BigDecimal
+  collectedFeesToken1_gte: uni_BigDecimal
+  collectedFeesToken1_lte: uni_BigDecimal
+  collectedFeesToken1_in: [uni_BigDecimal!]
+  collectedFeesToken1_not_in: [uni_BigDecimal!]
+  collectedFeesUSD: uni_BigDecimal
+  collectedFeesUSD_not: uni_BigDecimal
+  collectedFeesUSD_gt: uni_BigDecimal
+  collectedFeesUSD_lt: uni_BigDecimal
+  collectedFeesUSD_gte: uni_BigDecimal
+  collectedFeesUSD_lte: uni_BigDecimal
+  collectedFeesUSD_in: [uni_BigDecimal!]
+  collectedFeesUSD_not_in: [uni_BigDecimal!]
+  createdAtTimestamp: BigInt
+  createdAtTimestamp_not: BigInt
+  createdAtTimestamp_gt: BigInt
+  createdAtTimestamp_lt: BigInt
+  createdAtTimestamp_gte: BigInt
+  createdAtTimestamp_lte: BigInt
+  createdAtTimestamp_in: [BigInt!]
+  createdAtTimestamp_not_in: [BigInt!]
+  createdAtBlockNumber: BigInt
+  createdAtBlockNumber_not: BigInt
+  createdAtBlockNumber_gt: BigInt
+  createdAtBlockNumber_lt: BigInt
+  createdAtBlockNumber_gte: BigInt
+  createdAtBlockNumber_lte: BigInt
+  createdAtBlockNumber_in: [BigInt!]
+  createdAtBlockNumber_not_in: [BigInt!]
+  liquidityProviderCount: BigInt
+  liquidityProviderCount_not: BigInt
+  liquidityProviderCount_gt: BigInt
+  liquidityProviderCount_lt: BigInt
+  liquidityProviderCount_gte: BigInt
+  liquidityProviderCount_lte: BigInt
+  liquidityProviderCount_in: [BigInt!]
+  liquidityProviderCount_not_in: [BigInt!]
+  feeGrowthOutside0X128: BigInt
+  feeGrowthOutside0X128_not: BigInt
+  feeGrowthOutside0X128_gt: BigInt
+  feeGrowthOutside0X128_lt: BigInt
+  feeGrowthOutside0X128_gte: BigInt
+  feeGrowthOutside0X128_lte: BigInt
+  feeGrowthOutside0X128_in: [BigInt!]
+  feeGrowthOutside0X128_not_in: [BigInt!]
+  feeGrowthOutside1X128: BigInt
+  feeGrowthOutside1X128_not: BigInt
+  feeGrowthOutside1X128_gt: BigInt
+  feeGrowthOutside1X128_lt: BigInt
+  feeGrowthOutside1X128_gte: BigInt
+  feeGrowthOutside1X128_lte: BigInt
+  feeGrowthOutside1X128_in: [BigInt!]
+  feeGrowthOutside1X128_not_in: [BigInt!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Tick_filter]
+  or: [uni_Tick_filter]
+}
+
+enum uni_Tick_orderBy {
+  id
+  poolAddress
+  tickIdx
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  liquidityGross
+  liquidityNet
+  price0
+  price1
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  untrackedVolumeUSD
+  feesUSD
+  collectedFeesToken0
+  collectedFeesToken1
+  collectedFeesUSD
+  createdAtTimestamp
+  createdAtBlockNumber
+  liquidityProviderCount
+  feeGrowthOutside0X128
+  feeGrowthOutside1X128
+}
+
+type uni_Token {
+  id: ID!
+  symbol: String!
+  name: String!
+  decimals: BigInt!
+  totalSupply: BigInt!
+  volume: uni_BigDecimal!
+  volumeUSD: uni_BigDecimal!
+  untrackedVolumeUSD: uni_BigDecimal!
+  feesUSD: uni_BigDecimal!
+  txCount: BigInt!
+  poolCount: BigInt!
+  totalValueLocked: uni_BigDecimal!
+  totalValueLockedUSD: uni_BigDecimal!
+  totalValueLockedUSDUntracked: uni_BigDecimal!
+  derivedETH: uni_BigDecimal!
+  whitelistPools(skip: Int = 0, first: Int = 100, orderBy: uni_Pool_orderBy, orderDirection: uni_OrderDirection, where: uni_Pool_filter): [uni_Pool!]!
+  tokenDayData(skip: Int = 0, first: Int = 100, orderBy: uni_TokenDayData_orderBy, orderDirection: uni_OrderDirection, where: uni_TokenDayData_filter): [uni_TokenDayData!]!
+}
+
+type uni_TokenDayData {
+  id: ID!
+  date: Int!
+  token: uni_Token!
+  volume: uni_BigDecimal!
+  volumeUSD: uni_BigDecimal!
+  untrackedVolumeUSD: uni_BigDecimal!
+  totalValueLocked: uni_BigDecimal!
+  totalValueLockedUSD: uni_BigDecimal!
+  priceUSD: uni_BigDecimal!
+  feesUSD: uni_BigDecimal!
+  open: uni_BigDecimal!
+  high: uni_BigDecimal!
+  low: uni_BigDecimal!
+  close: uni_BigDecimal!
+}
+
+input uni_TokenDayData_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  date: Int
+  date_not: Int
+  date_gt: Int
+  date_lt: Int
+  date_gte: Int
+  date_lte: Int
+  date_in: [Int!]
+  date_not_in: [Int!]
+  token: String
+  token_not: String
+  token_gt: String
+  token_lt: String
+  token_gte: String
+  token_lte: String
+  token_in: [String!]
+  token_not_in: [String!]
+  token_contains: String
+  token_contains_nocase: String
+  token_not_contains: String
+  token_not_contains_nocase: String
+  token_starts_with: String
+  token_starts_with_nocase: String
+  token_not_starts_with: String
+  token_not_starts_with_nocase: String
+  token_ends_with: String
+  token_ends_with_nocase: String
+  token_not_ends_with: String
+  token_not_ends_with_nocase: String
+  token_: uni_Token_filter
+  volume: uni_BigDecimal
+  volume_not: uni_BigDecimal
+  volume_gt: uni_BigDecimal
+  volume_lt: uni_BigDecimal
+  volume_gte: uni_BigDecimal
+  volume_lte: uni_BigDecimal
+  volume_in: [uni_BigDecimal!]
+  volume_not_in: [uni_BigDecimal!]
+  volumeUSD: uni_BigDecimal
+  volumeUSD_not: uni_BigDecimal
+  volumeUSD_gt: uni_BigDecimal
+  volumeUSD_lt: uni_BigDecimal
+  volumeUSD_gte: uni_BigDecimal
+  volumeUSD_lte: uni_BigDecimal
+  volumeUSD_in: [uni_BigDecimal!]
+  volumeUSD_not_in: [uni_BigDecimal!]
+  untrackedVolumeUSD: uni_BigDecimal
+  untrackedVolumeUSD_not: uni_BigDecimal
+  untrackedVolumeUSD_gt: uni_BigDecimal
+  untrackedVolumeUSD_lt: uni_BigDecimal
+  untrackedVolumeUSD_gte: uni_BigDecimal
+  untrackedVolumeUSD_lte: uni_BigDecimal
+  untrackedVolumeUSD_in: [uni_BigDecimal!]
+  untrackedVolumeUSD_not_in: [uni_BigDecimal!]
+  totalValueLocked: uni_BigDecimal
+  totalValueLocked_not: uni_BigDecimal
+  totalValueLocked_gt: uni_BigDecimal
+  totalValueLocked_lt: uni_BigDecimal
+  totalValueLocked_gte: uni_BigDecimal
+  totalValueLocked_lte: uni_BigDecimal
+  totalValueLocked_in: [uni_BigDecimal!]
+  totalValueLocked_not_in: [uni_BigDecimal!]
+  totalValueLockedUSD: uni_BigDecimal
+  totalValueLockedUSD_not: uni_BigDecimal
+  totalValueLockedUSD_gt: uni_BigDecimal
+  totalValueLockedUSD_lt: uni_BigDecimal
+  totalValueLockedUSD_gte: uni_BigDecimal
+  totalValueLockedUSD_lte: uni_BigDecimal
+  totalValueLockedUSD_in: [uni_BigDecimal!]
+  totalValueLockedUSD_not_in: [uni_BigDecimal!]
+  priceUSD: uni_BigDecimal
+  priceUSD_not: uni_BigDecimal
+  priceUSD_gt: uni_BigDecimal
+  priceUSD_lt: uni_BigDecimal
+  priceUSD_gte: uni_BigDecimal
+  priceUSD_lte: uni_BigDecimal
+  priceUSD_in: [uni_BigDecimal!]
+  priceUSD_not_in: [uni_BigDecimal!]
+  feesUSD: uni_BigDecimal
+  feesUSD_not: uni_BigDecimal
+  feesUSD_gt: uni_BigDecimal
+  feesUSD_lt: uni_BigDecimal
+  feesUSD_gte: uni_BigDecimal
+  feesUSD_lte: uni_BigDecimal
+  feesUSD_in: [uni_BigDecimal!]
+  feesUSD_not_in: [uni_BigDecimal!]
+  open: uni_BigDecimal
+  open_not: uni_BigDecimal
+  open_gt: uni_BigDecimal
+  open_lt: uni_BigDecimal
+  open_gte: uni_BigDecimal
+  open_lte: uni_BigDecimal
+  open_in: [uni_BigDecimal!]
+  open_not_in: [uni_BigDecimal!]
+  high: uni_BigDecimal
+  high_not: uni_BigDecimal
+  high_gt: uni_BigDecimal
+  high_lt: uni_BigDecimal
+  high_gte: uni_BigDecimal
+  high_lte: uni_BigDecimal
+  high_in: [uni_BigDecimal!]
+  high_not_in: [uni_BigDecimal!]
+  low: uni_BigDecimal
+  low_not: uni_BigDecimal
+  low_gt: uni_BigDecimal
+  low_lt: uni_BigDecimal
+  low_gte: uni_BigDecimal
+  low_lte: uni_BigDecimal
+  low_in: [uni_BigDecimal!]
+  low_not_in: [uni_BigDecimal!]
+  close: uni_BigDecimal
+  close_not: uni_BigDecimal
+  close_gt: uni_BigDecimal
+  close_lt: uni_BigDecimal
+  close_gte: uni_BigDecimal
+  close_lte: uni_BigDecimal
+  close_in: [uni_BigDecimal!]
+  close_not_in: [uni_BigDecimal!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_TokenDayData_filter]
+  or: [uni_TokenDayData_filter]
+}
+
+enum uni_TokenDayData_orderBy {
+  id
+  date
+  token
+  token__id
+  token__symbol
+  token__name
+  token__decimals
+  token__totalSupply
+  token__volume
+  token__volumeUSD
+  token__untrackedVolumeUSD
+  token__feesUSD
+  token__txCount
+  token__poolCount
+  token__totalValueLocked
+  token__totalValueLockedUSD
+  token__totalValueLockedUSDUntracked
+  token__derivedETH
+  volume
+  volumeUSD
+  untrackedVolumeUSD
+  totalValueLocked
+  totalValueLockedUSD
+  priceUSD
+  feesUSD
+  open
+  high
+  low
+  close
+}
+
+type uni_TokenHourData {
+  id: ID!
+  periodStartUnix: Int!
+  token: uni_Token!
+  volume: uni_BigDecimal!
+  volumeUSD: uni_BigDecimal!
+  untrackedVolumeUSD: uni_BigDecimal!
+  totalValueLocked: uni_BigDecimal!
+  totalValueLockedUSD: uni_BigDecimal!
+  priceUSD: uni_BigDecimal!
+  feesUSD: uni_BigDecimal!
+  open: uni_BigDecimal!
+  high: uni_BigDecimal!
+  low: uni_BigDecimal!
+  close: uni_BigDecimal!
+}
+
+input uni_TokenHourData_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  periodStartUnix: Int
+  periodStartUnix_not: Int
+  periodStartUnix_gt: Int
+  periodStartUnix_lt: Int
+  periodStartUnix_gte: Int
+  periodStartUnix_lte: Int
+  periodStartUnix_in: [Int!]
+  periodStartUnix_not_in: [Int!]
+  token: String
+  token_not: String
+  token_gt: String
+  token_lt: String
+  token_gte: String
+  token_lte: String
+  token_in: [String!]
+  token_not_in: [String!]
+  token_contains: String
+  token_contains_nocase: String
+  token_not_contains: String
+  token_not_contains_nocase: String
+  token_starts_with: String
+  token_starts_with_nocase: String
+  token_not_starts_with: String
+  token_not_starts_with_nocase: String
+  token_ends_with: String
+  token_ends_with_nocase: String
+  token_not_ends_with: String
+  token_not_ends_with_nocase: String
+  token_: uni_Token_filter
+  volume: uni_BigDecimal
+  volume_not: uni_BigDecimal
+  volume_gt: uni_BigDecimal
+  volume_lt: uni_BigDecimal
+  volume_gte: uni_BigDecimal
+  volume_lte: uni_BigDecimal
+  volume_in: [uni_BigDecimal!]
+  volume_not_in: [uni_BigDecimal!]
+  volumeUSD: uni_BigDecimal
+  volumeUSD_not: uni_BigDecimal
+  volumeUSD_gt: uni_BigDecimal
+  volumeUSD_lt: uni_BigDecimal
+  volumeUSD_gte: uni_BigDecimal
+  volumeUSD_lte: uni_BigDecimal
+  volumeUSD_in: [uni_BigDecimal!]
+  volumeUSD_not_in: [uni_BigDecimal!]
+  untrackedVolumeUSD: uni_BigDecimal
+  untrackedVolumeUSD_not: uni_BigDecimal
+  untrackedVolumeUSD_gt: uni_BigDecimal
+  untrackedVolumeUSD_lt: uni_BigDecimal
+  untrackedVolumeUSD_gte: uni_BigDecimal
+  untrackedVolumeUSD_lte: uni_BigDecimal
+  untrackedVolumeUSD_in: [uni_BigDecimal!]
+  untrackedVolumeUSD_not_in: [uni_BigDecimal!]
+  totalValueLocked: uni_BigDecimal
+  totalValueLocked_not: uni_BigDecimal
+  totalValueLocked_gt: uni_BigDecimal
+  totalValueLocked_lt: uni_BigDecimal
+  totalValueLocked_gte: uni_BigDecimal
+  totalValueLocked_lte: uni_BigDecimal
+  totalValueLocked_in: [uni_BigDecimal!]
+  totalValueLocked_not_in: [uni_BigDecimal!]
+  totalValueLockedUSD: uni_BigDecimal
+  totalValueLockedUSD_not: uni_BigDecimal
+  totalValueLockedUSD_gt: uni_BigDecimal
+  totalValueLockedUSD_lt: uni_BigDecimal
+  totalValueLockedUSD_gte: uni_BigDecimal
+  totalValueLockedUSD_lte: uni_BigDecimal
+  totalValueLockedUSD_in: [uni_BigDecimal!]
+  totalValueLockedUSD_not_in: [uni_BigDecimal!]
+  priceUSD: uni_BigDecimal
+  priceUSD_not: uni_BigDecimal
+  priceUSD_gt: uni_BigDecimal
+  priceUSD_lt: uni_BigDecimal
+  priceUSD_gte: uni_BigDecimal
+  priceUSD_lte: uni_BigDecimal
+  priceUSD_in: [uni_BigDecimal!]
+  priceUSD_not_in: [uni_BigDecimal!]
+  feesUSD: uni_BigDecimal
+  feesUSD_not: uni_BigDecimal
+  feesUSD_gt: uni_BigDecimal
+  feesUSD_lt: uni_BigDecimal
+  feesUSD_gte: uni_BigDecimal
+  feesUSD_lte: uni_BigDecimal
+  feesUSD_in: [uni_BigDecimal!]
+  feesUSD_not_in: [uni_BigDecimal!]
+  open: uni_BigDecimal
+  open_not: uni_BigDecimal
+  open_gt: uni_BigDecimal
+  open_lt: uni_BigDecimal
+  open_gte: uni_BigDecimal
+  open_lte: uni_BigDecimal
+  open_in: [uni_BigDecimal!]
+  open_not_in: [uni_BigDecimal!]
+  high: uni_BigDecimal
+  high_not: uni_BigDecimal
+  high_gt: uni_BigDecimal
+  high_lt: uni_BigDecimal
+  high_gte: uni_BigDecimal
+  high_lte: uni_BigDecimal
+  high_in: [uni_BigDecimal!]
+  high_not_in: [uni_BigDecimal!]
+  low: uni_BigDecimal
+  low_not: uni_BigDecimal
+  low_gt: uni_BigDecimal
+  low_lt: uni_BigDecimal
+  low_gte: uni_BigDecimal
+  low_lte: uni_BigDecimal
+  low_in: [uni_BigDecimal!]
+  low_not_in: [uni_BigDecimal!]
+  close: uni_BigDecimal
+  close_not: uni_BigDecimal
+  close_gt: uni_BigDecimal
+  close_lt: uni_BigDecimal
+  close_gte: uni_BigDecimal
+  close_lte: uni_BigDecimal
+  close_in: [uni_BigDecimal!]
+  close_not_in: [uni_BigDecimal!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_TokenHourData_filter]
+  or: [uni_TokenHourData_filter]
+}
+
+enum uni_TokenHourData_orderBy {
+  id
+  periodStartUnix
+  token
+  token__id
+  token__symbol
+  token__name
+  token__decimals
+  token__totalSupply
+  token__volume
+  token__volumeUSD
+  token__untrackedVolumeUSD
+  token__feesUSD
+  token__txCount
+  token__poolCount
+  token__totalValueLocked
+  token__totalValueLockedUSD
+  token__totalValueLockedUSDUntracked
+  token__derivedETH
+  volume
+  volumeUSD
+  untrackedVolumeUSD
+  totalValueLocked
+  totalValueLockedUSD
+  priceUSD
+  feesUSD
+  open
+  high
+  low
+  close
+}
+
+input uni_Token_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  symbol: String
+  symbol_not: String
+  symbol_gt: String
+  symbol_lt: String
+  symbol_gte: String
+  symbol_lte: String
+  symbol_in: [String!]
+  symbol_not_in: [String!]
+  symbol_contains: String
+  symbol_contains_nocase: String
+  symbol_not_contains: String
+  symbol_not_contains_nocase: String
+  symbol_starts_with: String
+  symbol_starts_with_nocase: String
+  symbol_not_starts_with: String
+  symbol_not_starts_with_nocase: String
+  symbol_ends_with: String
+  symbol_ends_with_nocase: String
+  symbol_not_ends_with: String
+  symbol_not_ends_with_nocase: String
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_contains_nocase: String
+  name_not_contains: String
+  name_not_contains_nocase: String
+  name_starts_with: String
+  name_starts_with_nocase: String
+  name_not_starts_with: String
+  name_not_starts_with_nocase: String
+  name_ends_with: String
+  name_ends_with_nocase: String
+  name_not_ends_with: String
+  name_not_ends_with_nocase: String
+  decimals: BigInt
+  decimals_not: BigInt
+  decimals_gt: BigInt
+  decimals_lt: BigInt
+  decimals_gte: BigInt
+  decimals_lte: BigInt
+  decimals_in: [BigInt!]
+  decimals_not_in: [BigInt!]
+  totalSupply: BigInt
+  totalSupply_not: BigInt
+  totalSupply_gt: BigInt
+  totalSupply_lt: BigInt
+  totalSupply_gte: BigInt
+  totalSupply_lte: BigInt
+  totalSupply_in: [BigInt!]
+  totalSupply_not_in: [BigInt!]
+  volume: uni_BigDecimal
+  volume_not: uni_BigDecimal
+  volume_gt: uni_BigDecimal
+  volume_lt: uni_BigDecimal
+  volume_gte: uni_BigDecimal
+  volume_lte: uni_BigDecimal
+  volume_in: [uni_BigDecimal!]
+  volume_not_in: [uni_BigDecimal!]
+  volumeUSD: uni_BigDecimal
+  volumeUSD_not: uni_BigDecimal
+  volumeUSD_gt: uni_BigDecimal
+  volumeUSD_lt: uni_BigDecimal
+  volumeUSD_gte: uni_BigDecimal
+  volumeUSD_lte: uni_BigDecimal
+  volumeUSD_in: [uni_BigDecimal!]
+  volumeUSD_not_in: [uni_BigDecimal!]
+  untrackedVolumeUSD: uni_BigDecimal
+  untrackedVolumeUSD_not: uni_BigDecimal
+  untrackedVolumeUSD_gt: uni_BigDecimal
+  untrackedVolumeUSD_lt: uni_BigDecimal
+  untrackedVolumeUSD_gte: uni_BigDecimal
+  untrackedVolumeUSD_lte: uni_BigDecimal
+  untrackedVolumeUSD_in: [uni_BigDecimal!]
+  untrackedVolumeUSD_not_in: [uni_BigDecimal!]
+  feesUSD: uni_BigDecimal
+  feesUSD_not: uni_BigDecimal
+  feesUSD_gt: uni_BigDecimal
+  feesUSD_lt: uni_BigDecimal
+  feesUSD_gte: uni_BigDecimal
+  feesUSD_lte: uni_BigDecimal
+  feesUSD_in: [uni_BigDecimal!]
+  feesUSD_not_in: [uni_BigDecimal!]
+  txCount: BigInt
+  txCount_not: BigInt
+  txCount_gt: BigInt
+  txCount_lt: BigInt
+  txCount_gte: BigInt
+  txCount_lte: BigInt
+  txCount_in: [BigInt!]
+  txCount_not_in: [BigInt!]
+  poolCount: BigInt
+  poolCount_not: BigInt
+  poolCount_gt: BigInt
+  poolCount_lt: BigInt
+  poolCount_gte: BigInt
+  poolCount_lte: BigInt
+  poolCount_in: [BigInt!]
+  poolCount_not_in: [BigInt!]
+  totalValueLocked: uni_BigDecimal
+  totalValueLocked_not: uni_BigDecimal
+  totalValueLocked_gt: uni_BigDecimal
+  totalValueLocked_lt: uni_BigDecimal
+  totalValueLocked_gte: uni_BigDecimal
+  totalValueLocked_lte: uni_BigDecimal
+  totalValueLocked_in: [uni_BigDecimal!]
+  totalValueLocked_not_in: [uni_BigDecimal!]
+  totalValueLockedUSD: uni_BigDecimal
+  totalValueLockedUSD_not: uni_BigDecimal
+  totalValueLockedUSD_gt: uni_BigDecimal
+  totalValueLockedUSD_lt: uni_BigDecimal
+  totalValueLockedUSD_gte: uni_BigDecimal
+  totalValueLockedUSD_lte: uni_BigDecimal
+  totalValueLockedUSD_in: [uni_BigDecimal!]
+  totalValueLockedUSD_not_in: [uni_BigDecimal!]
+  totalValueLockedUSDUntracked: uni_BigDecimal
+  totalValueLockedUSDUntracked_not: uni_BigDecimal
+  totalValueLockedUSDUntracked_gt: uni_BigDecimal
+  totalValueLockedUSDUntracked_lt: uni_BigDecimal
+  totalValueLockedUSDUntracked_gte: uni_BigDecimal
+  totalValueLockedUSDUntracked_lte: uni_BigDecimal
+  totalValueLockedUSDUntracked_in: [uni_BigDecimal!]
+  totalValueLockedUSDUntracked_not_in: [uni_BigDecimal!]
+  derivedETH: uni_BigDecimal
+  derivedETH_not: uni_BigDecimal
+  derivedETH_gt: uni_BigDecimal
+  derivedETH_lt: uni_BigDecimal
+  derivedETH_gte: uni_BigDecimal
+  derivedETH_lte: uni_BigDecimal
+  derivedETH_in: [uni_BigDecimal!]
+  derivedETH_not_in: [uni_BigDecimal!]
+  whitelistPools: [String!]
+  whitelistPools_not: [String!]
+  whitelistPools_contains: [String!]
+  whitelistPools_contains_nocase: [String!]
+  whitelistPools_not_contains: [String!]
+  whitelistPools_not_contains_nocase: [String!]
+  whitelistPools_: uni_Pool_filter
+  tokenDayData_: uni_TokenDayData_filter
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Token_filter]
+  or: [uni_Token_filter]
+}
+
+enum uni_Token_orderBy {
+  id
+  symbol
+  name
+  decimals
+  totalSupply
+  volume
+  volumeUSD
+  untrackedVolumeUSD
+  feesUSD
+  txCount
+  poolCount
+  totalValueLocked
+  totalValueLockedUSD
+  totalValueLockedUSDUntracked
+  derivedETH
+  whitelistPools
+  tokenDayData
+}
+
+type uni_Transaction {
+  id: ID!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  gasUsed: BigInt!
+  gasPrice: BigInt!
+  mints(skip: Int = 0, first: Int = 100, orderBy: uni_Mint_orderBy, orderDirection: uni_OrderDirection, where: uni_Mint_filter): [uni_Mint]!
+  burns(skip: Int = 0, first: Int = 100, orderBy: uni_Burn_orderBy, orderDirection: uni_OrderDirection, where: uni_Burn_filter): [uni_Burn]!
+  swaps(skip: Int = 0, first: Int = 100, orderBy: uni_Swap_orderBy, orderDirection: uni_OrderDirection, where: uni_Swap_filter): [uni_Swap]!
+  flashed(skip: Int = 0, first: Int = 100, orderBy: uni_Flash_orderBy, orderDirection: uni_OrderDirection, where: uni_Flash_filter): [uni_Flash]!
+  collects(skip: Int = 0, first: Int = 100, orderBy: uni_Collect_orderBy, orderDirection: uni_OrderDirection, where: uni_Collect_filter): [uni_Collect]!
+}
+
+input uni_Transaction_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  blockNumber: BigInt
+  blockNumber_not: BigInt
+  blockNumber_gt: BigInt
+  blockNumber_lt: BigInt
+  blockNumber_gte: BigInt
+  blockNumber_lte: BigInt
+  blockNumber_in: [BigInt!]
+  blockNumber_not_in: [BigInt!]
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_not_in: [BigInt!]
+  gasUsed: BigInt
+  gasUsed_not: BigInt
+  gasUsed_gt: BigInt
+  gasUsed_lt: BigInt
+  gasUsed_gte: BigInt
+  gasUsed_lte: BigInt
+  gasUsed_in: [BigInt!]
+  gasUsed_not_in: [BigInt!]
+  gasPrice: BigInt
+  gasPrice_not: BigInt
+  gasPrice_gt: BigInt
+  gasPrice_lt: BigInt
+  gasPrice_gte: BigInt
+  gasPrice_lte: BigInt
+  gasPrice_in: [BigInt!]
+  gasPrice_not_in: [BigInt!]
+  mints_: uni_Mint_filter
+  burns_: uni_Burn_filter
+  swaps_: uni_Swap_filter
+  flashed_: uni_Flash_filter
+  collects_: uni_Collect_filter
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_Transaction_filter]
+  or: [uni_Transaction_filter]
+}
+
+enum uni_Transaction_orderBy {
+  id
+  blockNumber
+  timestamp
+  gasUsed
+  gasPrice
+  mints
+  burns
+  swaps
+  flashed
+  collects
+}
+
+type uni_UniswapDayData {
+  id: ID!
+  date: Int!
+  volumeETH: uni_BigDecimal!
+  volumeUSD: uni_BigDecimal!
+  volumeUSDUntracked: uni_BigDecimal!
+  feesUSD: uni_BigDecimal!
+  txCount: BigInt!
+  tvlUSD: uni_BigDecimal!
+}
+
+input uni_UniswapDayData_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  date: Int
+  date_not: Int
+  date_gt: Int
+  date_lt: Int
+  date_gte: Int
+  date_lte: Int
+  date_in: [Int!]
+  date_not_in: [Int!]
+  volumeETH: uni_BigDecimal
+  volumeETH_not: uni_BigDecimal
+  volumeETH_gt: uni_BigDecimal
+  volumeETH_lt: uni_BigDecimal
+  volumeETH_gte: uni_BigDecimal
+  volumeETH_lte: uni_BigDecimal
+  volumeETH_in: [uni_BigDecimal!]
+  volumeETH_not_in: [uni_BigDecimal!]
+  volumeUSD: uni_BigDecimal
+  volumeUSD_not: uni_BigDecimal
+  volumeUSD_gt: uni_BigDecimal
+  volumeUSD_lt: uni_BigDecimal
+  volumeUSD_gte: uni_BigDecimal
+  volumeUSD_lte: uni_BigDecimal
+  volumeUSD_in: [uni_BigDecimal!]
+  volumeUSD_not_in: [uni_BigDecimal!]
+  volumeUSDUntracked: uni_BigDecimal
+  volumeUSDUntracked_not: uni_BigDecimal
+  volumeUSDUntracked_gt: uni_BigDecimal
+  volumeUSDUntracked_lt: uni_BigDecimal
+  volumeUSDUntracked_gte: uni_BigDecimal
+  volumeUSDUntracked_lte: uni_BigDecimal
+  volumeUSDUntracked_in: [uni_BigDecimal!]
+  volumeUSDUntracked_not_in: [uni_BigDecimal!]
+  feesUSD: uni_BigDecimal
+  feesUSD_not: uni_BigDecimal
+  feesUSD_gt: uni_BigDecimal
+  feesUSD_lt: uni_BigDecimal
+  feesUSD_gte: uni_BigDecimal
+  feesUSD_lte: uni_BigDecimal
+  feesUSD_in: [uni_BigDecimal!]
+  feesUSD_not_in: [uni_BigDecimal!]
+  txCount: BigInt
+  txCount_not: BigInt
+  txCount_gt: BigInt
+  txCount_lt: BigInt
+  txCount_gte: BigInt
+  txCount_lte: BigInt
+  txCount_in: [BigInt!]
+  txCount_not_in: [BigInt!]
+  tvlUSD: uni_BigDecimal
+  tvlUSD_not: uni_BigDecimal
+  tvlUSD_gt: uni_BigDecimal
+  tvlUSD_lt: uni_BigDecimal
+  tvlUSD_gte: uni_BigDecimal
+  tvlUSD_lte: uni_BigDecimal
+  tvlUSD_in: [uni_BigDecimal!]
+  tvlUSD_not_in: [uni_BigDecimal!]
+  """Filter for the block changed event."""
+  _change_block: uni_BlockChangedFilter
+  and: [uni_UniswapDayData_filter]
+  or: [uni_UniswapDayData_filter]
+}
+
+enum uni_UniswapDayData_orderBy {
+  id
+  date
+  volumeETH
+  volumeUSD
+  volumeUSDUntracked
+  feesUSD
+  txCount
+  tvlUSD
+}
+
+type uni__Block_ {
+  """The hash of the block"""
+  hash: uni_Bytes
+  """The block number"""
+  number: Int!
+  """Integer representation of the timestamp stored in blocks for the chain"""
+  timestamp: Int
+  """The hash of the parent block"""
+  parentHash: uni_Bytes
+}
+
+"""The type for the top-level _meta field"""
+type uni__Meta_ {
+  """
+  Information about a specific subgraph block. The hash of the block
+  will be null if the _meta field has a block constraint that asks for
+  a block number. It will be filled if the _meta field has no block constraint
+  and therefore asks for the latest  block
+  
+  """
+  block: uni__Block_!
+  """The deployment ID"""
+  deployment: String!
+  """If `true`, the subgraph encountered indexing errors at some past block"""
+  hasIndexingErrors: Boolean!
+}
+
+enum uni__SubgraphErrorPolicy_ {
+  """Data will be returned even if the subgraph has indexing errors"""
+  allow
+  """
+  If the subgraph has indexing errors, data will be omitted. The default.
+  """
+  deny
+}

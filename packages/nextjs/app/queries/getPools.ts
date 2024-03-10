@@ -7,27 +7,14 @@ export const GET_POOLS = gql`
     $balOrderBy: bal_Pool_orderBy, 
     $balOrderDirection: bal_OrderDirection,
     $uniOrderBy: uni_Pool_orderBy,
-    $uniOrderDirection: uni_OrderDirection,
-    $balPoolId: ID,
-    $uniPoolId: ID,
-    $poolAddress: bal_Bytes
+    $uniOrderDirection: uni_OrderDirection
   ) {
-   bal_pools(first: $first, 
-    skip: $skip, 
-    orderBy: $balOrderBy, 
-    orderDirection: $balOrderDirection, 
-    where: {
-      or: [
-          { id: $balPoolId },
-          { address: $poolAddress }
-        ],
-      totalLiquidity_gt: "100",
-      totalSwapVolume_gt: "100"
-    } ) {
+   bal_pools(first: $first, skip: $skip, orderBy: $balOrderBy, orderDirection: $balOrderDirection where: {totalLiquidity_gt: "100", totalSwapVolume_gt: "100"} ) {
       id
       name
       tokens {
         symbol
+        address
       }
       poolType
       swapFee
@@ -37,19 +24,7 @@ export const GET_POOLS = gql`
       totalSwapVolume
     }
 
-    uni_pools(
-      first: $first, 
-      skip: $skip, 
-      orderBy: $uniOrderBy, 
-      orderDirection: $uniOrderDirection, 
-      where: {
-        or: [
-          { id: $uniPoolId }
-        ],
-        totalValueLockedUSD_gt: "100",
-        volumeUSD_gt: "100"
-      }
-    ) {
+    uni_pools(first: $first, skip: $skip, orderBy: $uniOrderBy, orderDirection: $uniOrderDirection where: {totalValueLockedUSD_gt: "100", volumeUSD_gt: "100"}) {
       id
       feeTier
       txCount
