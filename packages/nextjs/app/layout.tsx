@@ -14,7 +14,7 @@ const imageUrl = `${baseUrl}/thumbnail.jpg`;
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "PoolDive App",
+    default: "PoolDive",
     template: "%s | PoolDive",
   },
   description: "Built with 🏗 Scaffold-ETH 2",

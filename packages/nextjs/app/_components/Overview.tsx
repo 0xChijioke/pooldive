@@ -30,13 +30,13 @@ const Overview: React.FC = () => {
   }
 
   if (!balancerData || !uniswapData) {
-    return <div>Loading...</div>;
+    return <div><span className="loading loading-ring loading-lg"></span></div>;
   }
 
   
   return (
-    <div className="flex flex-col gap-y-6">
-      <div className="text-center animate__backInRight">
+    <div className="flex flex-col overflow-hidden gap-y-6">
+      <div className="text-center animate__animated animate__backInRight">
         <h2 className="text-lg">Balancer v2</h2>
           {/* <h2 className="text-xs">Ethereum mainnet</h2> */}
         {/* Balancer Stats */}
@@ -49,7 +49,7 @@ const Overview: React.FC = () => {
       </div>
 
           
-      <div className="text-center animate__backInLeft">
+      <div className="text-center animate__animated animate__backInLeft">
         <h2 className="text-lg">Uniswap v3</h2>
           {/* Uniswap Stats */}
         <div className="stats stats-vertical lg:stats-horizontal shadow">

@@ -6,14 +6,14 @@ import axios from "axios";
 import { ethers } from "ethers";
 import { CurrentConfig, POOL_FACTORY_CONTRACT_ADDRESS_UNI, getMainnetProvider } from "~~/common/config";
 
-export async function getFullPool(): Promise<{
+export async function getFullPool({token0, token1 } : { token0: any, token1: any }): Promise<{
   pool: Pool;
   ticks: BarChartTick[];
 }> {
   const poolAddress = computePoolAddress({
     factoryAddress: POOL_FACTORY_CONTRACT_ADDRESS_UNI,
-    tokenA: CurrentConfig.pool.tokenA,
-    tokenB: CurrentConfig.pool.tokenB,
+    tokenA: token0,
+    tokenB: token1,
     fee: CurrentConfig.pool.fee,
   });
 
@@ -33,9 +33,9 @@ export async function getFullPool(): Promise<{
   });
 
   const fullPool = new Pool(
-    CurrentConfig.pool.tokenA,
-    CurrentConfig.pool.tokenB,
-    CurrentConfig.pool.fee,
+    token0,
+    token1,
+    CurrentConfig.pool.fee, //TODO: collects User data
     slot0.sqrtPriceX96,
     liquidity,
     slot0.tick,
