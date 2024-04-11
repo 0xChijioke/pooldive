@@ -8,7 +8,7 @@ const SearchPools = ({ selectedPool, searchResults, setSearchResults }: { select
     poolAddress: '',
   });
   const [loading, setLoading] = useState(false);
-  const [searchInput, setSearchInput] = useState(''); // 0xCBCdF9626bC03E24f779434178A73a0B4bad62eD
+  const [searchInput, setSearchInput] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -64,8 +64,6 @@ const SearchPools = ({ selectedPool, searchResults, setSearchResults }: { select
         placeholder="Search by id, address, or token symbol"
         onChange={(e) => setSearchInput(e.target.value)}
       />
-      {/* {loading && <span>Loading...</span>}
-      {error && <span className="text-red-500">{error}</span>} */}
     </form>
   );
 };

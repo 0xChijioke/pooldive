@@ -7,7 +7,6 @@ import { TGetPoolQuery } from '~~/types/types';
 import SearchPools from './SearchPools';
 
 
-// TODO: use stateContext.tsx to manage state.
 const Pools = () => {
   const [poolLists, setPoolLists] = useState<{ [key in 'bal' | 'uni']: any }>({
     bal: [],
@@ -43,7 +42,7 @@ const Pools = () => {
       try {
         setLoading(true);
         const sdk = getBuiltGraphSDK();
-        const result = await sdk. GetPools(filterOptions);
+        const result = await sdk.GetPools(filterOptions);
 
 
         const selectedPoolOrderDirection = filterOptions[`${selectedPool}OrderDirection`];
@@ -77,7 +76,7 @@ const Pools = () => {
         });
 
         
-        setHasMore((prevHasMore) => ({
+        setHasMore(() => ({
           bal: (result as any)['bal_pools'].length === filterOptions.first,
           uni: (result as any)['uni_pools'].length === filterOptions.first,
         }));
@@ -125,8 +124,6 @@ const Pools = () => {
         </select>
       </div>
 
-
-      {/* {loading && <span className="flex justify-center m-auto loading loading-ring loading-lg"></span>} */}
       {poolLists[selectedPool] && poolLists[selectedPool].length > 0 &&  (
         <>
           <PoolsTable pools={poolLists} selectedPool={selectedPool} setFilterOptions={setFilterOptions} />
