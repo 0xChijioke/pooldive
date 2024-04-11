@@ -4,20 +4,6 @@ Welcome to Pooldive, a tool for exploring and engaging with liquidity pools in E
 
 
 
-## Features (🚧 Work in progress)
-
-- **User-Friendly Interface:** An intuitive interface empowers users to explore DeFi pools effortlessly.
-  
-- **Pool Exploration:** Dive into Uniswap v3 and Balancer v2 pools with ease.
-  
-- **Liquidity Provision:** Seamlessly participate in liquidity provision as the process undergoes refinement and optimization for user convenience.
-  
-- **Arbitrage Opportunities:** Identify potential arbitrage opportunities for strategic decision-making.
-  
-- **Composed Liquidity:** Explore the power of composed liquidity as additional protocols integrate with Pooldive, expanding access to decentralized finance opportunities.
-
-
-
 ## Tech Stack 🛠️
 
 Pooldive is built with the following technologies:
@@ -68,7 +54,7 @@ yarn start
 
 Explore DeFi pools, participate in liquidity provision, and identify arbitrage opportunities using the intuitive user interface of Pooldive.
 
-## Future Plans 🔭
+## Exploration 🔭
 
 1. Chain Agnosticism
 2. Enhanced Functionalities
